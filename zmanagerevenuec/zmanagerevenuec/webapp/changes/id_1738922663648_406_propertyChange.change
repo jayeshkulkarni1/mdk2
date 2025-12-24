@@ -1,0 +1,37 @@
+{
+  "fileName": "id_1738922663648_406_propertyChange",
+  "fileType": "change",
+  "changeType": "propertyChange",
+  "moduleName": "",
+  "reference": "customer.zmanagerevenuec",
+  "packageName": "$TMP",
+  "content": {
+    "property": "editable",
+    "newValue": false
+  },
+  "selector": {
+    "id": "fin.rar.manage.contract::sap.suite.ui.generic.template.ObjectPage.view.Details::C_RAPerfOblgnWthToCurPerdAmtTP--com.sap.vocabularies.UI.v1.FieldGroup::pob_general3::FormGroup_C_RAPerfOblgnWthToCurPerdAmtTPType_ZZ1_ZZPCODE_RCI-element0-input",
+    "type": "sap.ui.comp.smartfield.SmartField",
+    "idIsLocal": false
+  },
+  "layer": "CUSTOMER_BASE",
+  "texts": {},
+  "namespace": "apps/fin.rar.manage.contract/adapt/customer.zmanagerevenuec/changes/",
+  "projectId": "customer.zmanagerevenuec",
+  "creation": "2025-02-07T10:04:27.361Z",
+  "originalLanguage": "EN",
+  "support": {
+    "generator": "@sap-ux/control-property-editor",
+    "service": "",
+    "user": "",
+    "sapui5Version": "1.96.37",
+    "sourceChangeFileName": "",
+    "compositeCommand": "",
+    "command": "property"
+  },
+  "oDataInformation": {},
+  "dependentSelector": {},
+  "jsOnly": false,
+  "variantReference": "",
+  "appDescriptorChange": false
+}

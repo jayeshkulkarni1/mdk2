@@ -1,0 +1,59 @@
+{
+  "fileName": "id_1738922605693_396_addFields",
+  "fileType": "change",
+  "changeType": "addFields",
+  "moduleName": "",
+  "reference": "customer.zmanagerevenuec",
+  "packageName": "$TMP",
+  "content": {
+    "field": {
+      "value": [
+        "ZZ1_ZZPCODE_RCI"
+      ],
+      "valueProperty": [
+        "value"
+      ],
+      "selector": {
+        "id": "fin.rar.manage.contract::sap.suite.ui.generic.template.ObjectPage.view.Details::C_RAPerfOblgnWthToCurPerdAmtTP--com.sap.vocabularies.UI.v1.FieldGroup::pob_general3::FormGroup_C_RAPerfOblgnWthToCurPerdAmtTPType_ZZ1_ZZPCODE_RCI",
+        "idIsLocal": false
+      },
+      "jsTypes": [
+        "sap.ui.comp.smartfield.SmartField"
+      ],
+      "index": 1
+    }
+  },
+  "selector": {
+    "id": "fin.rar.manage.contract::sap.suite.ui.generic.template.ObjectPage.view.Details::C_RAPerfOblgnWthToCurPerdAmtTP--com.sap.vocabularies.UI.v1.FieldGroup::pob_general3::FormGroup",
+    "idIsLocal": false
+  },
+  "layer": "CUSTOMER_BASE",
+  "texts": {},
+  "namespace": "apps/fin.rar.manage.contract/adapt/customer.zmanagerevenuec/changes/",
+  "projectId": "customer.zmanagerevenuec",
+  "creation": "2025-02-07T10:04:27.357Z",
+  "originalLanguage": "EN",
+  "support": {
+    "generator": "@sap-ux/control-property-editor",
+    "service": "",
+    "user": "",
+    "sapui5Version": "1.96.37",
+    "sourceChangeFileName": "",
+    "compositeCommand": "id_1738922605695_397_composite",
+    "command": "addDelegateProperty"
+  },
+  "oDataInformation": {
+    "oDataServiceUri": "/sap/opu/odata/sap/FARR_CONTRACT_OVERVIEW/",
+    "propertyName": "ZZ1_ZZPCODE_RCI",
+    "entityType": "C_RAPerfOblgnWthToCurPerdAmtTPType"
+  },
+  "dependentSelector": {
+    "form": {
+      "id": "fin.rar.manage.contract::sap.suite.ui.generic.template.ObjectPage.view.Details::C_RAPerfOblgnWthToCurPerdAmtTP--PobGeneral::Form",
+      "idIsLocal": false
+    }
+  },
+  "jsOnly": false,
+  "variantReference": "",
+  "appDescriptorChange": false
+}
