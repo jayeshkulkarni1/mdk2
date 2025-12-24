@@ -1,0 +1,23 @@
+{
+	"Onboarding": {
+		"Schema": "sapmobilesvcs",
+		"TimeZone": "UTC",
+		"URL": ""
+	},
+	"CF": {
+		"Target": "https://api.cf.us10-001.hana.ondemand.com",
+		"Organization": "29d7a959-3e76-4dec-b1f9-1d7ecf6c55b2",
+		"Space": "56c56f60-ea40-49d5-bae4-3af9d3e04789"
+	},
+	"MobileService": {
+		"Type": "standard",
+		"AdminAPI": "https://mobile-service-cockpit-api.cfapps.us10.hana.ondemand.com/cockpit/v1/org/29d7a959-3e76-4dec-b1f9-1d7ecf6c55b2/space/56c56f60-ea40-49d5-bae4-3af9d3e04789",
+		"AppId": "SAM2405.GLBL",
+		"Destination": []
+	},
+	"Build": {
+		"SourceMap": true,
+		"TSTarget": "es6",
+		"WMF": true
+	}
+}
