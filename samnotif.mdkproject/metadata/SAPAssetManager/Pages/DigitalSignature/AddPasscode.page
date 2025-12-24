@@ -1,0 +1,38 @@
+{
+	"Caption": "$(L, add_passcode)",
+	"OnLoaded": "/SAPAssetManager/Rules/DigitalSignature/AddPasscodeOnLoaded.js",
+	"ActionBar": {
+		"Items": [
+			{
+				"Position": "Right",
+				"Caption": "$(L, done)",
+				"OnPress": "/SAPAssetManager/Actions/OData/DigitalSignature/CheckRequiredPasscode.action"
+			}
+		]
+	},
+	"Controls": [
+		{
+			"_Type": "Control.Type.SectionedTable",
+			"Sections": [
+				{
+					"Controls": [
+						{
+							"_Type": "Control.Type.FormCell.SimpleProperty",
+							"_Name": "passcode",
+							"IsEditable": true,
+							"Caption": "$(L, authenticator_ototp)",
+							"PlaceHolder": "$(L, enter_passcode)",
+							"HelperText": "$(L, add_passcode_helpertext)"
+						}
+					],
+					"_Type": "Section.Type.FormCell",
+					"_Name": "FormCellContainerSectionFormCell0"
+				}
+			],
+			"_Name": "FormCellContainer"
+		}
+	],
+	"_Name": "AddPasscode",
+	"_Type": "Page",
+	"PrefersLargeCaption": true
+}

@@ -1,0 +1,23 @@
+{
+	"Onboarding": {
+		"Schema": "sapmobilesvcs",
+		"TimeZone": "UTC",
+		"URL": ""
+	},
+	"CF": {
+		"Target": "https://api.cf.us20.hana.ondemand.com",
+		"Organization": "e31faae5-8694-47e5-847e-4b77f4997bea",
+		"Space": "d4c3e89f-d6ba-4f31-b7d4-57a6298b295c"
+	},
+	"MobileService": {
+		"Type": "standard",
+		"AdminAPI": "https://mobile-service-cockpit-api.cfapps.us20.hana.ondemand.com/cockpit/v1/org/e31faae5-8694-47e5-847e-4b77f4997bea/space/d4c3e89f-d6ba-4f31-b7d4-57a6298b295c",
+		"AppId": "SAP.SAM2210.QA1.AND",
+		"Destination": []
+	},
+	"Build": {
+		"SourceMap": true,
+		"TSTarget": "es6",
+		"WMF": false
+	}
+}

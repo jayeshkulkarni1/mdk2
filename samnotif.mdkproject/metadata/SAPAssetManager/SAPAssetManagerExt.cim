@@ -1,0 +1,86 @@
+{
+	"ProjectName": "SAPAssetManagerExt",
+	"ApplicationName": "SAPAssetManagerExt",
+	"IntegrationPoints": [
+		{
+			"Source": "/SAPAssetManagerExt/i18n/i18n.properties",
+			"Target": "/SAPAssetManager/i18n/i18n.properties"
+		},
+		{
+			"Source": "/SAPAssetManagerExt/Rules/Notifications/CreateUpdate/RequiredFields.js",
+			"Target": "/SAPAssetManager/Rules/Notifications/CreateUpdate/RequiredFields.js"
+		},
+		{
+			"Source": "/SAPAssetManagerExt/Pages/Notifications/NotificationCreateUpdate.page",
+			"Target": "/SAPAssetManager/Pages/Notifications/NotificationCreateUpdate.page"
+		},
+		{
+			"Source": "/SAPAssetManagerExt/Pages/Notifications/NotificationItemCreateUpdate.page",
+			"Target": "/SAPAssetManager/Pages/Notifications/NotificationItemCreateUpdate.page"
+		},
+		{
+			"Source": "/SAPAssetManagerExt/Rules/Notifications/CreateUpdate/NotificationCreateUpdateTypeOnValueChange.js",
+			"Target": "/SAPAssetManager/Rules/Notifications/CreateUpdate/NotificationCreateUpdateTypeOnValueChange.js"
+		},
+		{
+			"Source": "/SAPAssetManagerExt/Rules/Notifications/CreateUpdate/NotificationCreateUpdateOnCommit.js",
+			"Target": "/SAPAssetManager/Rules/Notifications/CreateUpdate/NotificationCreateUpdateOnCommit.js"
+		},
+		{
+			"Source": "/SAPAssetManagerExt/Rules/Notifications/CreateUpdate/UpdateGroupPickers.js",
+			"Target": "/SAPAssetManager/Rules/Notifications/CreateUpdate/UpdateGroupPickers.js"
+		},
+		{
+			"Source": "/SAPAssetManagerExt/Rules/Notifications/Item/NotificationItemCreateUpdateOnCommit.js",
+			"Target": "/SAPAssetManager/Rules/Notifications/Item/CreateUpdate/NotificationItemCreateUpdateOnCommit.js"
+		},
+		{
+			"Source": "/SAPAssetManagerExt/Rules/Notifications/NotificationUpdateNav.js",
+			"Target": "/SAPAssetManager/Rules/Notifications/NotificationUpdateNav.js"
+		},
+		{
+			"Source": "/SAPAssetManagerExt/Rules/Notifications/CreateUpdate/NotificationCreateUpdateOnPageLoad.js",
+			"Target": "/SAPAssetManager/Rules/Notifications/CreateUpdate/NotificationCreateUpdateOnPageLoad.js"
+		},
+		{
+			"Source": "/SAPAssetManagerExt/Rules/Notifications/CreateUpdate/NotificationLinks.js",
+			"Target": "/SAPAssetManager/Rules/Notifications/CreateUpdate/NotificationLinks.js"
+		},
+		{
+			"Source": "/SAPAssetManagerExt/Rules/Notifications/CreateUpdate/NotificationItemPartGroupPickerItems.js",
+			"Target": "/SAPAssetManager/Rules/Notifications/Item/CreateUpdate/NotificationItemPartGroupPickerItems.js"
+		},
+		{
+			"Source": "/SAPAssetManagerExt/Pages/Notifications/NotificationDetails.page",
+			"Target": "/SAPAssetManager/Pages/Notifications/NotificationDetails.page"
+		},
+		{
+			"Source": "/SAPAssetManagerExt/Pages/Notifications/NotificationItemDetails.page",
+			"Target": "/SAPAssetManager/Pages/Notifications/NotificationItemDetails.page"
+		},
+		{
+			"Source": "/SAPAssetManagerExt/Pages/Confirmations/ConfirmationsCreateUpdate.page",
+			"Target": "/SAPAssetManager/Pages/Confirmations/ConfirmationsCreateUpdate.page"
+		},
+		{
+			"Source": "/SAPAssetManagerExt/Pages/WorkOrders/WorkOrderDetails.page",
+			"Target": "/SAPAssetManager/Pages/WorkOrders/WorkOrderDetails.page"
+		},
+		{
+			"Source": "/SAPAssetManagerExt/Pages/WorkOrders/WorkOrderCreateUpdate.page",
+			"Target": "/SAPAssetManager/Pages/WorkOrders/WorkOrderCreateUpdate.page"
+		},
+		{
+			"Source": "/SAPAssetManagerExt/Actions/WorkOrders/CreateUpdate/WorkOrderCreate.action",
+			"Target": "/SAPAssetManager/Actions/WorkOrders/CreateUpdate/WorkOrderCreate.action"
+		},
+		{
+			"Source": "/SAPAssetManagerExt/Rules/Confirmations/CreateUpdate/DurationOnValueChange.js",
+			"Target": "/SAPAssetManager/Rules/Confirmations/CreateUpdate/DurationOnValueChange.js"
+		},
+		{
+			"Source": "/SAPAssetManagerExt/Rules/WorkOrders/Complete/FinalizeCompletePageMessage.js",
+			"Target": "/SAPAssetManager/Rules/WorkOrders/Complete/FinalizeCompletePageMessage.js"
+		}
+	]
+}

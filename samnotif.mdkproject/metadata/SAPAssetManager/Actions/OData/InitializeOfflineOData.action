@@ -1,0 +1,16 @@
+{
+	"_Type": "Action.Type.ODataService.Initialize",
+	"ActionResult": {
+		"_Name": "result"
+	},
+	"Service": "/SAPAssetManager/Services/AssetManager.service",
+	"DefiningRequests": [
+		{
+			"Name": "Documents",
+			"Query": "Documents",
+			"AutomaticallyRetrievesStreams": true
+		}
+	],
+	"StoreName": "SAMStore",
+	"StoreEncryptionKey": "SAPTest123"
+}
