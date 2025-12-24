@@ -1,0 +1,177 @@
+@Metadata.layer: #CORE
+annotate entity ZCDSV_STP_E00708_P_BARVOLUME with
+{
+  @UI.facet: [ {
+    id: 'idIdentification',
+    type: #IDENTIFICATION_REFERENCE,
+    label: 'Reminder',
+    position: 10
+  } ]
+
+  @Consumption.filter.hidden: true
+  @UI:{ lineItem: [{position: 10,importance: #HIGH },
+        { type: #FOR_ACTION, dataAction: 'reassignBarGroup', label: 'Reassign Bar Group' }],
+        identification: [{position: 10 }]
+  }
+  Purchgroup;
+
+  @Consumption.filter.hidden: true
+  @UI:{ lineItem: [{position: 20,importance: #HIGH }],
+        identification: [{position: 20 }]
+  }
+  Newpurchgroup;
+
+  @Consumption.filter.hidden: true
+  @UI:{ lineItem: [{position: 30,importance: #HIGH, label: 'Parts' }],
+       identification: [{position: 30, label: 'Parts' }]
+  }
+  Partnumber;
+
+  @Consumption.filter.hidden: true
+  @UI:{ lineItem: [{position: 40,importance: #HIGH }],
+       identification: [{position: 40 }]
+  }
+  Supplier;
+
+  @Consumption.filter.hidden: true
+  @UI:{ lineItem: [{position: 50,importance: #HIGH }],
+        identification: [{position: 50 }]
+  }
+  Plantnumber;
+
+  @Consumption.filter.hidden: true
+  @UI:{ lineItem: [{position: 60 }],
+        identification: [{position: 60 }]
+  }
+  Costbin;
+
+  @Consumption.filter.hidden: true
+  @UI:{ lineItem: [{position: 70 }],
+        identification: [{position: 70 }]
+  }
+  Cost;
+
+  @Consumption.filter.hidden: true
+  @UI:{ lineItem: [{position: 80, label: 'Currency' }],
+        identification: [{position: 80 }]
+  }
+  Currency;
+
+  @UI:{ lineItem: [{position: 90,importance: #HIGH }],
+       identification: [{position: 90 }],
+       selectionField: [{position: 10 }]
+  }
+  Bargroup;
+
+  @Consumption.filter.hidden: true
+  @UI:{ identification: [{position: 100 }]
+  }
+  Thresholdqty;
+
+  @Consumption.filter.hidden: true
+  @UI:{ identification: [{position: 100 , label : 'Reminder Title'} ]
+  }
+  Title;
+
+  @Consumption.filter.hidden: true
+  @UI:{ identification: [{position: 110 , label : 'Reminder Description'} ]
+  }
+  Description;
+
+  @Consumption.filter.hidden: true
+  @UI:{ identification: [{position: 120 , label : 'Reminder Status'} ]
+  }
+  Status;
+
+  @Consumption.filter.hidden: true
+  @EndUserText.label: 'Attachment'
+  @UI.identification: [ { position: 130  } ]
+  Attachment;
+
+  @Consumption.filter.hidden: true
+  @UI:{ identification: [{position: 130 , label : 'Reminder Needed at 50%'} ]
+  }
+  Grthreshold50;
+
+  @Consumption.filter.hidden: true
+  @UI:{ identification: [{position: 140 , label : 'Reminder Needed at 75%'} ]
+  }
+  Grthreshold75;
+
+  @Consumption.filter.hidden: true
+  @UI:{ identification: [{position: 150 , label : 'Reminder Needed at 95%'} ]
+  }
+  Grthreshold95;
+
+  @Consumption.filter.hidden: true
+  @UI:{ identification: [{position: 160 , label : 'Threshold Reached 50'} ]
+  }
+  Grthreshold50conf;
+
+  @Consumption.filter.hidden: true
+  @UI:{ identification: [{position: 170 , label : 'Threshold Reached 75'} ]
+  }
+  Grthreshold75conf;
+
+  @Consumption.filter.hidden: true
+  @UI:{ identification: [{position: 180 , label : 'Threshold Reached 95'} ]
+  }
+  Grthreshold95conf;
+
+  @Consumption.filter.hidden: true
+  @UI:{ identification: [{position: 190 , label : 'Threshold Reached 100'} ]
+  }
+  Grthreshold100conf;
+
+  @Consumption.filter.hidden: true
+  @UI:{ identification: [{position: 200 , label : 'Claim'} ]
+  }
+  Claimnumber;
+
+  @Consumption.filter.hidden: true
+  @UI:{ identification: [{position: 210 , label : 'Remarks'} ]
+  }
+  Remarks;
+
+  @Consumption.filter.hidden: true
+  Mimetype;
+
+  @Consumption.filter.hidden: true
+  Filename;
+
+  @Consumption.filter.hidden: true
+  Createdby;
+
+  @Consumption.filter.hidden: true
+  Createdat;
+
+  @Consumption.filter.hidden: true
+  Lastchangedby;
+
+  @Consumption.filter.hidden: true
+  Lastchangedat;
+
+  @Consumption.filter.hidden: true
+  LocalLastChangedAt;
+
+  @Consumption.filter.hidden: true
+  Cumgrquantity;
+
+  @Consumption.filter.hidden: true
+  Dummy;
+
+  @Consumption.filter.hidden: true
+  Effectivedate;
+
+  @Consumption.filter.hidden: true
+  Pricingunit;
+
+  @Consumption.filter.hidden: true
+  Pricinguom;
+
+  @Consumption.filter.hidden: true
+  uuid;
+
+  @Consumption.filter.hidden: true
+  Buom;
+}
