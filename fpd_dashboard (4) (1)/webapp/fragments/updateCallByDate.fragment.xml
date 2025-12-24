@@ -1,0 +1,56 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:mvc="sap.ui.core.mvc" xmlns:sap.ui.fl="sap.ui.fl"
+	xmlns:core="sap.ui.core">
+	<Dialog
+		id="callByDateDialog"
+		title="{i18n>updateCalByDate}" contentWidth="750px" contentHeight="420px">
+		<content>
+		<Table
+					 sap.ui.fl:flexibility="sap/m/flexibility/EngineFlex"
+					inset="false" autoPopinMode="true" growing="true" growingThreshold="15" fixedLayout="false"
+					items="{
+						path: 'callByDateDialogModel>/'
+					}" 
+				>
+				<columns>
+						<Column minScreenWidth="Tablet" demandPopin="true">
+							<Text text="{i18n>salesOrder}"/>
+						</Column>
+						<Column minScreenWidth="Tablet" demandPopin="true" >
+							<Text text="{i18n>salesOrderItem}"/>
+						</Column>
+						<Column minScreenWidth="Tablet" demandPopin="true" >
+							<Text text="{i18n>callByDate}"/>
+						</Column>
+						
+						
+						</columns>
+						<items>
+						<ColumnListItem vAlign="Middle">
+							<cells>
+							
+								<Text text="{callByDateDialogModel>order}" />
+								<Text text="{callByDateDialogModel>item}" />
+								<DatePicker value="{callByDateDialogModel>date}" minDate="{callByDateDialogModel>minDate}" valueFormat="yyyy-MM-dd" displayFormat="dd.MM.yyyy"/>
+									
+									</cells>
+									</ColumnListItem>
+									</items>
+				</Table>
+			
+				
+			
+		</content>
+		  <beginButton>
+   <Button text="{i18n>ok}" press="UpdateCallByDat1e" />
+  </beginButton>
+  <endButton>
+   <Button text="{i18n>cancel}" press="closeUpdateCallByDate" />
+  </endButton>
+		
+	</Dialog>
+</core:FragmentDefinition>
+
+

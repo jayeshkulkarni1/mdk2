@@ -1,0 +1,254 @@
+{
+    "Columns": [
+        {
+            "ID": "SalesOrder",
+            "Text": "Sales Order"
+        },
+        {
+            "ID": "SalesOrderItem",
+            "Text": "Sales Document Item"
+        },
+        {
+            "ID": "SalesOrg",
+            "Text": "Sales Organization"
+        },
+        {
+            "ID": "Division",
+            "Text": "Division"
+        },
+        {
+            "ID": "OrderType",
+            "Text": "Order Type"
+        },
+        {
+            "ID": "OrderCreateDate",
+            "Text": "Order Creation Date"
+        },
+        {
+            "ID": "SoldTo",
+            "Text": "Sold-To"
+        },
+        {
+            "ID": "ShipTo",
+            "Text": "Ship-To"
+        },
+        {
+            "ID": "SalesOrderQty",
+            "Text": "Sales Order Quantity"
+        },
+        {
+            "ID": "Material",
+            "Text": "Material"
+        },
+        {
+            "ID": "MaterialDesc",
+            "Text": "Material Description"},{
+                "ID": "DelvPlant",
+                "Text": "Plant"
+            },
+            {
+                "ID": "CsrNumber",
+                "Text": "CSR Number"
+            },
+            {
+                "ID": "Message",
+                "Text": "Message"
+            },
+            {
+                "ID": "ConfirmedQty",
+                "Text": "Confirmed Quantity"
+            },
+            {
+                "ID": "ExSpace",
+                "Text": "Ex-Space Indicator"
+            },
+            {
+                "ID": "CallByDate",
+                "Text": "Call-By Date"
+            },
+            {
+                "ID": "FpdStatus",
+                "Text": "FPD Status"
+            },
+            {
+                "ID": "SalesOrderStock",
+                "Text": "Sales Order Stock"
+            },
+            {
+                "ID": "StoDelvItem",
+                "Text": "Stock Transfer Delivery Item"
+            },
+            {
+                "ID": "StoDelv",
+                "Text": "Stock Transfer Delivery"
+            },
+            {
+                "ID": "Sto",
+                "Text": "Stock Transfer Item"
+            },
+            {
+                "ID": "Contract",
+                "Text": "Contract"
+            },
+            {
+                "ID": "ContractType",
+                "Text": "Contract Type"
+            },
+            {
+                "ID": "ContractValidFrom",
+                "Text": "Contract Valid From"
+            },
+            {
+                "ID": "ContractValidTo",
+                "Text": "Contract Valid To"
+            },
+            {
+                "ID": "PricedDate",
+                "Text": "Priced Date"
+            },
+            {
+                "ID": "ContractItem",
+                "Text": "Contract Item"
+            },
+            {
+                "ID": "SalesOffice",
+                "Text": "Sales Office"
+            },
+            {
+                "ID": "SalesGroup",
+                "Text": "Sales Group"
+            },
+            {
+                "ID": "SalesGroup",
+                "Text": "Sales Group"
+            },
+            {
+                "ID": "SalesOrgName",
+                "Text": "Sales Organization Name"
+            },
+            {
+                "ID": "DivisionName",
+                "Text": "Division Name"
+            },
+            {
+                "ID": "DistributionChannel",
+                "Text": "Distribution Channel"
+            },
+            {
+                "ID": "DistributionChannelName",
+                "Text": "Distribution Channel Name"
+            },
+            {
+                "ID" : "BusinessScenario",
+                "Text": "Business Scenario"
+            },
+            {
+                "ID": "SoldToName",
+                "Text": "Sold To Name"
+            },
+            {
+                "ID": "ShipToName",
+                "Text": "Ship To Name"
+            },
+            {
+                "ID": "ShipToCity",
+                "Text": "Ship To City"
+            },
+            {
+                "ID": "ShipToRegion",
+                "Text": "Ship To Region"
+            },
+            {
+                "ID": "Unit",
+                "Text": "Unit"
+            },
+            {
+                "ID": "Currency",
+                "Text": "Currency"
+            },
+            {
+                "ID": "CustomerPoItem",
+                "Text": "Customer Po Item"
+            },
+            {
+                "ID": "SrvRendDate",
+                "Text": "Service Render Date"
+            },
+            {
+                "ID": "CsrNumber",
+                "Text": "CSR Number"
+            },
+            {
+                "ID": "CsrName",
+                "Text": "CSR Name"
+            },
+            {
+                "ID": "SalesDistrict",
+                "Text": "Sales District"
+            },
+            {
+                "ID": "SalesDistrict",
+                "Text": "Sales District Description"
+            },
+            {
+                "ID": "ReqDelvDate",
+                "Text": "Requested Delivery Date"
+            },{
+                "ID": "CustomerPo",
+                "Text": "Customer Po"
+            },{
+                "ID": "StoItem",
+                "Text": "Stock Transfer Item"
+            },{
+                "ID": "SalesOfficeDesc",
+                "Text": "Sales Office Description"
+            },{
+                "ID": "SalesGroupDesc",
+                "Text": "Sales Group Name"
+            },{
+                "ID": "SalesDistrictDesc",
+                "Text": "Sales District Description"
+            },{
+                "ID": "Inco1",
+                "Text": "Incoterms "
+            },{
+                "ID": "Inco2",
+                "Text": "Incoterms 2"
+            },{
+                "ID": "PaymentTerms",
+                "Text": "Payment Terms"
+            },{
+                "ID": "PaymentTermsDesc",
+                "Text": "Payment Terms Description"
+            },{
+                "ID": "ShipConditions",
+                "Text": "Ship Conditions"
+            },{
+                "ID": "FpdFinalPrice",
+                "Text": "FPD Final Price"
+            },{
+                "ID": "BpAgreement",
+                "Text": "Business Partner Agreement"
+            },
+            {
+                "ID": "ShipConditionsDesc",
+                "Text": "Ship Conditions Descripition"
+            },
+            
+            {
+                "ID": "LastUpdatedOn",
+                "Text": "Last Updated On"
+            },{
+                "ID": "LastUpdatedTime",
+                "Text": "Last Updated Time"
+            }
+        ],
+        "exSpace": [
+            {
+                "text": "Yes"
+            },
+            {
+                "text": "No"
+            }
+        ]
+    }

@@ -1,0 +1,231 @@
+<!-- Begin the code -->
+<!-- Workbench TR : DA1K909941
+      OTC_I655 New View Open Contracts Page Data on click of View Open Contracts button  added as part of new changes  -->
+    <mvc:View height="100%" xmlns:mvc="sap.ui.core.mvc" controllerName="schedulingprocess.schedulingprocess.controller.ViewOpenContracts" xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:f="sap.f" xmlns:fb="sap.ui.comp.filterbar"  xmlns:table="sap.ui.table" xmlns:svm="sap.ui.comp.smartvariants"> <f:DynamicPage headerExpanded="{/headerExpanded}" showFooter="true">
+        <f:title>
+            <f:DynamicPageTitle>
+                <f:heading>
+                    <Title text="{i18n>ViewOpenContracts}"/>
+                </f:heading>
+            </f:DynamicPageTitle>
+        </f:title>
+        <f:header>
+            <f:DynamicPageHeader>
+                <f:content>
+                    <fb:FilterBar id="viewOpencontractsFilter" persistencyKey="myPersbKey" useToolbar="false" search=".onSearch" filterChange=".onFilterChange" afterVariantLoad=".onAfterVariantLoad">
+                        <fb:filterGroupItems>
+                            <fb:FilterGroupItem name="Week" label="{i18n>week}" groupName="Group1" visibleInFilterBar="true">
+                                <fb:control>
+                                    <MultiInput id="weekInput" showSuggestion="false"  showValueHelp="true" valueHelpOnly="false" required="true" valueHelpRequest="handleWeekF4"/>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+                            <fb:FilterGroupItem name="Margin" label="{i18n>margin}" groupName="Group1" visibleInFilterBar="true">
+                                <fb:control>
+                                    <Input id="marginInput"  value=""/>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+                              <fb:FilterGroupItem name="Layout" label="{i18n>layout}"  groupName="Group1" visibleInFilterBar="true">
+                                <fb:control>
+                                    <MultiComboBox name="Layout" id="layout" showSelectAll="true" items="{path: 'LocalModel>/Columns'}">
+                                        <core:Item key="{LocalModel>ID}" text="{LocalModel>Text}"/>
+                                    </MultiComboBox>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+                        </fb:filterGroupItems>
+                    </fb:FilterBar>
+                </f:content>
+            </f:DynamicPageHeader>
+        </f:header>
+        <f:content>
+            <table:Table id="table" rows="{ViewOpenContractsModel>/results}" filter="onFilterScheduleTable" visible="false" selectionMode="None" showColumnVisibilityMenu="true">
+                <table:extension>
+                    <OverflowToolbar>
+                        <Title text="Items({= ${ViewOpenContractsModel>/results}.length})" level="H2"/>
+                        <ToolbarSpacer/>
+                        <Input width="12rem" placeholder="{i18n>fixedcolumncount}" tooltip="{i18n>fixedcolumncount}" liveChange="onColumnFreeze"/>
+                        <Button icon="sap-icon://excel-attachment" press="onExport"/>
+                    </OverflowToolbar>
+                </table:extension>
+                <table:columns>
+                    <table:Column width="11rem" id="Week" filterProperty="Week">
+                        <Label text="{i18n>week}"/>
+                        <table:template>
+                            <Text text="{ViewOpenContractsModel>Week}"/>
+                        </table:template>
+                    </table:Column>
+                    <!-- Adding margin column Defect Fix : 1887 for OTC_I55 object Work Bench TR : DA1K911309  -->
+                       <table:Column width="11rem" id="Margin" filterProperty="Margin">
+                        <Label text="{i18n>amount}"/>
+                        <table:template>
+                            <Text text="{path: 'ViewOpenContractsModel>Margin', formatter: '.formatter.QtyFormatting'}" />
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="11rem" id="ContractNumber" filterProperty="ContractNumber">
+                        <Label text="{i18n>salesandDistributionDocNum}"/>
+                        <table:template>
+                            <Text text="{ViewOpenContractsModel>ContractNumber}"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="11rem" id="Item" filterProperty="Item">
+                        <Label text="{i18n>itemNumberofsdDoc}"/>
+                        <table:template>
+                            <Text text="{ViewOpenContractsModel>Item}"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="11rem" id="ManagerId" filterProperty="ManagerId">
+                        <Label text="{i18n>accountMngID}"/>
+                        <table:template>
+                            <Text text="{ViewOpenContractsModel>ManagerId}"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="11rem" id="BusinessScenario" filterProperty="BusinessScenario">
+                        <Label text="{i18n>businessScenario}"/>
+                        <table:template>
+                            <Text text="{ViewOpenContractsModel>BusinessScenario}"/>
+                        </table:template>
+                    </table:Column>
+                     <!-- Begin the code 
+                    Work Bench TR : DA1K912060
+                    New changes to add table column for Business Process -->
+                        <table:Column width="11rem" id="BusProcess" filterProperty="BusProcess">
+                        <Label text="{i18n>busProcess}"/>
+                        <table:template>
+                            <Text text="{ViewOpenContractsModel>BusProcess}"/>
+                        </table:template>
+                    </table:Column>
+                    <!-- End the code -->
+                    <table:Column width="11rem" id="Plant" filterProperty="Plant">
+                        <Label text="{i18n>plant}"/>
+                        <table:template>
+                            <Text text="{ViewOpenContractsModel>Plant}"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="11rem" id="NetworkPlant" filterProperty="NetworkPlant">
+                        <Label text="{i18n>NetworkPlant}"/>
+                        <table:template>
+                            <Text text="{ViewOpenContractsModel>NetworkPlant}"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="11rem" id="SoldToId" filterProperty="SoldToId">
+                        <Label text="{i18n>soldToPartyID}"/>
+                        <table:template>
+                            <Text text="{ViewOpenContractsModel>SoldToId}"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="11rem" id="ShiptoId" filterProperty="ShiptoId">
+                        <Label text="{i18n>shiptoPartyID}"/>
+                        <table:template>
+                            <Text text="{ViewOpenContractsModel>ShiptoId}"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="11rem" id="SoldToName" filterProperty="SoldToName">
+                        <Label text="{i18n>soldToPrtyName}"/>
+                        <table:template>
+                            <Text text="{ViewOpenContractsModel>SoldToName}"/>
+                        </table:template>
+                    </table:Column>
+
+                    <table:Column width="11rem" id="ShipToName" filterProperty="ShipToName">
+                        <Label text="{i18n>shipToPrtyName}"/>
+                        <table:template>
+                            <Text text="{ViewOpenContractsModel>ShipToName}"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="11rem" id="Material" filterProperty="Material">
+                        <Label text="{i18n>matnr}"/>
+                        <table:template>
+                            <Text text="{ViewOpenContractsModel>Material}"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="11rem" id="FormulaKey" filterProperty="FormulaKey">
+                        <Label text="{i18n>formulaKey}"/>
+                        <table:template>
+                            <Text text="{ViewOpenContractsModel>FormulaKey}"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="11rem" id="Incoterms" filterProperty="Incoterms">
+                        <Label text="{i18n>incoterms}"/>
+                        <table:template>
+                            <Text text="{ViewOpenContractsModel>Incoterms}"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="11rem" id="AccMngName" filterProperty="AccMngName">
+                        <Label text="{i18n>accountMngName}"/>
+                        <table:template>
+                            <Text text="{ViewOpenContractsModel>AccMngName}"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="11rem" id="MaterialDesc" filterProperty="MaterialDesc">
+                        <Label text="{i18n>matnrDesc}"/>
+                        <table:template>
+                            <Text text="{ViewOpenContractsModel>MaterialDesc}"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="11rem" id="FormulaKeyDesc" filterProperty="FormulaKeyDesc">
+                        <Label text="{i18n>formulaDesc}"/>
+                        <table:template>
+                            <Text text="{ViewOpenContractsModel>FormulaKeyDesc}"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="11rem" id="OrdQty" filterProperty="OrdQty">
+                        <Label text="{i18n>orderQty}"/>
+                        <table:template>
+                            <Text text="{path: 'ViewOpenContractsModel>OrdQty', formatter: '.formatter.QtyFormatting'}" />
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="11rem" id="BlockFlag" filterProperty="BlockFlag">
+                        <Label text="{i18n>blockFlag}"/>
+                        <table:template>
+                            <Text text="{ViewOpenContractsModel>BlockFlag}"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="11rem" id="ExpiredContractFlag" filterProperty="ExpiredContractFlag">
+                        <Label text="{i18n>expContQty}"/>
+                        <table:template>
+                            <Text text="{ViewOpenContractsModel>ExpiredContractFlag}"/>
+                        </table:template>
+                    </table:Column>
+
+                    <table:Column width="11rem" id="FutureContractFlag" filterProperty="FutureContractFlag">
+                        <Label text="{i18n>futContQty}"/>
+                        <table:template>
+                           <Text text="{ViewOpenContractsModel>FutureContractFlag}"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="11rem" id="BulkFlag" filterProperty="BulkFlag">
+                        <Label text="{i18n>bulkflag}"/>
+                        <table:template>
+                            <Text text="{ViewOpenContractsModel>BulkFlag}"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="11rem" id="DocType" filterProperty="DocType">
+                        <Label text="{i18n>docType}"/>
+                        <table:template>
+                            <Text text="{ViewOpenContractsModel>DocType}"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="11rem" id="ValidFrom" filterProperty="ValidFrom">
+                        <Label text="{i18n>validfrom}"/>
+                        <table:template>
+                            <Text text="{ViewOpenContractsModel>ValidFrom}"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="11rem" id="ValidTo" filterProperty="ValidTo">
+                        <Label text="{i18n>validto}"/>
+                        <table:template>
+                            <Text text="{ViewOpenContractsModel>ValidTo}"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="11rem" id="RemainingQty" filterProperty="RemainingQty">
+                        <Label text="{i18n>remainingQty}"/>
+                        <table:template>
+                             <Text text="{path: 'ViewOpenContractsModel>RemainingQty', formatter: '.formatter.QtyFormatting'}" />
+                        </table:template>
+                    </table:Column>
+                </table:columns>
+            </table:Table>
+        </f:content>
+    </f:DynamicPage>
+</mvc:View>
+<!-- End the code -->
+

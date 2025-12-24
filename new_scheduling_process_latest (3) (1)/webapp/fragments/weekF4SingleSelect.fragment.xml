@@ -1,0 +1,40 @@
+<core:FragmentDefinition
+	xmlns="sap.ui.comp.valuehelpdialog"
+	xmlns:m="sap.m"
+	xmlns:fb="sap.ui.comp.filterbar"
+	xmlns:core="sap.ui.core">
+	<ValueHelpDialog
+		supportMultiselect="false"
+		title="{i18n>week}"
+		ok=".onValueHelpOkPress"
+		cancel=".onValueHelpCancelPress"
+		supportRanges="true"
+		key="Week" descriptionKey="Current_Week"
+		>
+		<filterBar>
+			<fb:FilterBar advancedMode="true" search=".onFilterBarSearch" isRunningInValueHelpDialog="true">
+				<fb:filterGroupItems>
+					<fb:FilterGroupItem
+						groupName="__$INTERNAL$"
+						name="Week"
+						label="{i18n>week}"
+						visibleInFilterBar="true">
+						<fb:control>
+							<m:Input name="Week" />
+						</fb:control>
+					</fb:FilterGroupItem>
+					<fb:FilterGroupItem
+						groupName="__$INTERNAL$"
+						name="Current_Week"
+						label="{i18n>currentWeek}"
+						visibleInFilterBar="true">
+						<fb:control>
+							<m:Input name="Current_Week" />
+						</fb:control>
+					</fb:FilterGroupItem>
+					
+				</fb:filterGroupItems>
+			</fb:FilterBar>
+		</filterBar>
+	</ValueHelpDialog>
+</core:FragmentDefinition>

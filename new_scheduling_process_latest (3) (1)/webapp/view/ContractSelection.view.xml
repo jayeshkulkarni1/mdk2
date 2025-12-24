@@ -1,0 +1,144 @@
+<mvc:View controllerName="schedulingprocess.schedulingprocess.controller.ContractSelection" xmlns:mvc="sap.ui.core.mvc" displayBlock="true" xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form" xmlns:core="sap.ui.core">
+    <App id="App">
+        <Page id="page" title="{i18n>title}" showHeader="false">
+            <content>
+                <MessageStrip text="{i18n>mandatoryCheck}" type="Warning" enableFormattedText="true" showIcon="true" showCloseButton="true" class="sapUiMediumMarginBottom" visible="false" id="errorMsgStrip"/>
+                <VBox class="sapUiSmallMargin">
+                    <f:Form id="contractSelection" editable="true">
+                        <f:title>
+                            <core:Title text="{i18n>autConrSel}"/>
+                        </f:title>
+                        <f:layout>
+                            <f:ResponsiveGridLayout labelSpanXL="4" labelSpanL="4" labelSpanM="12" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="2" columnsL="2" columnsM="1" singleContainerFullSize="false"/>
+                        </f:layout>
+                        <f:formContainers>
+                            <f:FormContainer>
+                                <f:formElements>
+                                    <f:FormElement label="{i18n>weekNumber}" class="sapUismallMarginBelow">
+                                        <f:fields>
+                                            <MultiInput id="weekInput" showSuggestion="false" width="100%" showValueHelp="true" valueHelpOnly="false" required="true" valueHelpRequest="handleWeekF4"/>
+                                        </f:fields>
+                                    </f:FormElement>
+
+                                    <f:FormElement label="{i18n>accountMng}" class="sapUismallMarginBelow">
+                                        <f:fields>
+                                            <MultiInput id="accMngInput" showSuggestion="false" width="100%" showValueHelp="true" valueHelpOnly="false" valueHelpRequest="handleAccManagerF4"/>
+
+                                        </f:fields>
+                                    </f:FormElement>
+                                    <f:FormElement label="{i18n>plant}" class="sapUismallMarginBelow">
+                                        <f:fields>
+                                            <MultiInput id="plantInput" showSuggestion="false" width="100%" showValueHelp="true" valueHelpOnly="false" valueHelpRequest="handlePlantF4"/>
+                                        </f:fields>
+                                    </f:FormElement>
+                                    <f:FormElement label="{i18n>netwrkOfPlant}" class="sapUismallMarginBelow">
+                                        <f:fields>
+                                            <MultiInput id="plantGroupInput" showSuggestion="false" width="100%" showValueHelp="true" valueHelpOnly="false" valueHelpRequest="handlePlantGroupF4"/>
+                                        </f:fields>
+                                    </f:FormElement>
+                                </f:formElements>
+                            </f:FormContainer>
+                            <f:FormContainer>
+                                <f:formElements>
+                                    <f:FormElement label="{i18n>matnr}" class="sapUismallMarginBelow">
+                                        <f:fields>
+                                            <MultiInput id="materialInput" showSuggestion="false" width="100%" showValueHelp="true" valueHelpOnly="false" valueHelpRequest="handleMaterialF4"/>
+                                        </f:fields>
+                                    </f:FormElement>
+                                    <f:FormElement label="{i18n>formulaKey}" class="sapUismallMarginBelow">
+                                        <f:fields>
+                                            <MultiInput id="formulaKeyInput" showSuggestion="false" width="100%" showValueHelp="true" valueHelpOnly="false" valueHelpRequest="handleFormulaKeyF4"/>
+                                        </f:fields>
+                                    </f:FormElement>
+                                    <f:FormElement label="{i18n>incomTerm}" class="sapUismallMarginBelow">
+                                        <f:fields>
+                                            <MultiInput id="incotermsInput" showSuggestion="false" width="100%" showValueHelp="true" valueHelpOnly="false" valueHelpRequest="handleIncotermsF4"/>
+                                        </f:fields>
+                                    </f:FormElement>
+                                </f:formElements>
+                            </f:FormContainer>
+                        </f:formContainers>
+                    </f:Form>
+                </VBox>
+                <VBox class="sapUiSmallMargin">
+                    <f:Form id="strategy" editable="true">
+                        <f:title>
+                            <core:Title text="{i18n>strategy}"/>
+                        </f:title>
+                        <f:layout>
+                            <f:ResponsiveGridLayout labelSpanXL="4" labelSpanL="4" labelSpanM="4" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="3" columnsL="2" columnsM="2"/>
+                        </f:layout>
+                        <f:formContainers>
+                            <f:FormContainer>
+                                <f:formElements>
+                                    <f:FormElement label="{i18n>priority1}">
+                                        <f:fields>
+                                            <ComboBox required="true" id="p1" width="60%" showClearIcon="true" change="onp1Select">
+                                                <core:Item key="fifo" text="FIFO"/>
+
+                                                <core:Item key="lifo" text="LIFO"/>
+
+                                                <core:Item key="margin" text="Margin"/>
+
+                                            </ComboBox>
+                                        </f:fields>
+                                    </f:FormElement>
+                                </f:formElements>
+                            </f:FormContainer>
+                            <f:FormContainer>
+                                <f:formElements>
+                                    <f:FormElement label="{i18n>priority2}">
+                                        <f:fields>
+                                            <ComboBox required="false" id="p2" showClearIcon="true" width="60%" change="onp2Select" enabled="true">
+                                                <core:Item key="fifo" text="FIFO"/>
+
+                                                <core:Item key="lifo" text="LIFO"/>
+
+                                                <core:Item key="margin" text="Margin"/>
+                                            </ComboBox>
+                                        </f:fields>
+                                    </f:FormElement>
+                                </f:formElements>
+                            </f:FormContainer>
+                        </f:formContainers>
+                    </f:Form>
+                </VBox>
+
+                <VBox class="sapUiSmallMargin">
+                    <f:Form id="otherContractSelect">
+                        <f:title>
+                            <core:Title text="{i18n>other}"/>
+                        </f:title>
+                        <f:layout>
+                            <f:ResponsiveGridLayout labelSpanXL="4" labelSpanL="3" labelSpanM="4" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="4" emptySpanM="0" emptySpanS="0" columnsXL="2" columnsL="1" columnsM="1" singleContainerFullSize="false"/>
+                        </f:layout>
+                        <f:formContainers>
+                            <f:FormContainer>
+                                <f:formElements>
+                                    <f:FormElement>
+                                        <f:fields>
+                                            <CheckBox width="100%" text="{i18n>expiredContract}" id="expiredContractCheckBox" class="sapUiLargeMarginBegin"/>
+                                        </f:fields>
+                                    </f:FormElement>
+                                    <f:FormElement>
+                                        <f:fields>
+                                            <CheckBox width="100%" text="{i18n>futureContract}" id="futureContractCheckBox" class="sapUiLargeMarginBegin"/>
+                                        </f:fields>
+                                    </f:FormElement>
+                                </f:formElements>
+                            </f:FormContainer>
+                        </f:formContainers>
+                    </f:Form>
+                </VBox>
+            </content>
+            <footer>
+                <Toolbar>
+                    <Button icon="sap-icon://alert" text="{= ${message>/}.length}" visible="{= ${message>/}.length > 0}" type="Emphasized" press="onMessagePopOver"/>
+                    <ToolbarSpacer/>
+                    <Button text="{i18n>submit}" press="onSubmit" type="Accept" class="sapUiSmallMargin" id="submitBtn"/>
+                    <Button type="Reject" text="{i18n>reject}" press="onCancelDH"/>
+                </Toolbar>
+            </footer>
+        </Page>
+    </App>
+</mvc:View>

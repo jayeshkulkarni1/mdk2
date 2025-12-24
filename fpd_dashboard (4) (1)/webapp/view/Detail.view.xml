@@ -1,0 +1,412 @@
+<mvc:View
+    controllerName="fdpdashboard.controller.Detail"
+    xmlns:html="http://www.w3.org/1999/xhtml"
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
+    xmlns="sap.m"
+    xmlns:fb="sap.ui.comp.filterbar"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:o="sap.uxap"
+    xmlns:l="sap.ui.layout"
+    xmlns:ui="sap.ui.table"
+    xmlns:core="sap.ui.core"
+>
+    <App>
+        <pages>
+            <Page
+                title="{i18n>title}"
+                showNavButton="false"
+                navButtonPress="onNavBack"
+            >
+                <content>
+                    <o:ObjectPageLayout
+                        showFooter="true"
+                        enableLazyLoading="true"
+                    >
+                        <o:headerTitle>
+                            <o:ObjectPageDynamicHeaderTitle>
+                                <o:expandedHeading>
+                                    <Title
+                                        text="{i18n>salesOrder}: {DetailModel>/SalesOrder}"
+                                        wrapping="true"
+                                    />
+                                </o:expandedHeading>
+                                <o:actions />
+                            </o:ObjectPageDynamicHeaderTitle>
+                        </o:headerTitle>
+                        <o:headerContent />
+                        <o:sections>
+                            <o:ObjectPageSection
+                                titleUppercase="false"
+                                title="{i18n>general}"
+                            >
+                                <o:subSections>
+                                    <o:ObjectPageSubSection
+                                        titleUppercase="false"
+                                    >
+                                        <f:SimpleForm
+                                            editable="true"
+                                            columnsM="2"
+                                            columnsL="3"
+                                            columnsXL="4"
+                                            width="100%"
+                                            class="form"
+                                        >
+                                            <f:content>
+                                                <core:Title />
+                                                <Label
+                                                    text="{i18n>salesOrder}"
+                                                />
+                                                <Text
+                                                    text=" {DetailModel>/SalesOrder}"
+                                                />
+                                                <Label
+                                                    text="{i18n>salesOrderItem}"
+                                                />
+                                                <Text
+                                                    text=" {DetailModel>/SalesOrderItem}"
+                                                />
+                                                 <Label
+                                                    text="{i18n>salesOffice}"
+                                                />
+                                                <Text
+                                                    text=" {DetailModel>/SalesOffice}"
+                                                />
+                                                 <Label
+                                                    text="{i18n>salesGroup}"
+                                                />
+                                                <Text
+                                                    text=" {DetailModel>/SalesGroup}"
+                                                />
+                                                <Label text="{i18n>salesOrg}" />
+                                                <Text
+                                                    text="{DetailModel>/SalesOrg}"
+                                                />
+                                                <Label text="{i18n>division}" />
+                                                <Text
+                                                    text="{DetailModel>/Division}"
+                                                />
+                                                <Label
+                                                    text="{i18n>orderType}"
+                                                />
+                                                <Text
+                                                    text="{DetailModel>/OrderType}"
+                                                />
+                                                <Label
+                                                    text="{i18n>orderCreatDate}"
+                                                />
+                                                <Text
+                                                    text="{path: 'DetailModel>/OrderCreateDate', formatter:'.formatter.formatDate'}"
+                                                />
+
+                                                <Label text="{i18n>soldTo}" />
+                                                <Text
+                                                    text="{DetailModel>/SoldTo}"
+                                                />
+                                                <Label text="{i18n>shipTo}" />
+                                                <Text
+                                                    text="{DetailModel>/ShipTo}"
+                                                />
+                                                <Label text="{i18n>orderQty}" />
+                                                <Text
+                                                    text="{DetailModel>/SalesOrderQty}"
+                                                />
+                                                <Label text="{i18n>matnr}" />
+                                                <Text
+                                                    text="{DetailModel>/Material}"
+                                                />
+                                                <Label text="{i18n>plant}" />
+                                                <Text
+                                                    text="{DetailModel>/DelvPlant}"
+                                                />
+                                                <Label
+                                                    text="{i18n>customerPo}"
+                                                />
+                                                <Text
+                                                    text="{DetailModel>/CustomerPo}"
+                                                />
+                                                <Label text="{i18n>message}" />
+                                                <Text
+                                                    text="{DetailModel>/Message}"
+                                                />
+                                                <Label
+                                                    text="{i18n>configQty}"
+                                                />
+                                                <Text
+                                                    text="{DetailModel>/ConfirmedQty}"
+                                                />
+                                                <Label
+                                                    text="{i18n>paymentTerms}"
+                                                />
+                                                <Text
+                                                    text="{DetailModel>/PaymentTerms}"
+                                                />
+                                                <Label
+                                                    text="{i18n>paymentTermsDesc}"
+                                                />
+                                                <Text
+                                                    text="{DetailModel>/PaymentTermsDesc}"
+                                                />
+                                                <Label
+                                                    text="{i18n>shipConditions}"
+                                                />
+                                                <Text
+                                                    text="{DetailModel>/ShipConditions}"
+                                                />
+                                                <Label
+                                                    text="{i18n>shipConditionsDesc}"
+                                                />
+                                                <Text
+                                                    text="{DetailModel>/ShipConditionsDesc}"
+                                                />
+                                                <Label
+                                                    text="{i18n>bpAgreement}"
+                                                />
+                                                <Text
+                                                    text="{DetailModel>/BpAgreement}"
+                                                />
+                                                <Label
+                                                    text="{i18n>materialDesc}"
+                                                />
+                                                <Text
+                                                    text="{DetailModel>/MaterialDesc}"
+                                                />
+                                                <Label
+                                                    text="{i18n>unit}"
+                                                />
+                                                <Text
+                                                    text="{DetailModel>/Unit}"
+                                                />
+                                                <Label
+                                                    text="{i18n>currency}"
+                                                />
+                                                <Text
+                                                    text="{DetailModel>/Currency}"
+                                                />
+                                                <Label
+                                                    text="{i18n>customerPoItem}"
+                                                />
+                                                <Text
+                                                    text="{DetailModel>/CustomerPoItem}"
+                                                />
+                                                <Label
+                                                    text="{i18n>srvRendDate}"
+                                                />
+                                                <Text
+                                                    text="{DetailModel>/SrvRendDate}"
+                                                />
+                                                
+
+                                                <Label
+                                                    text="{i18n>exSpaceInd}"
+                                                />
+                                                <Text
+                                                    text="{path: 'DetailModel>/ExSpace', formatter:'.formatter.spaceIndicator'}"
+                                                />
+
+                                                <Label
+                                                    text="{i18n>callByDate}"
+                                                />
+
+                                                <Text
+                                                    text="{path: 'DetailModel>/CallByDate', formatter:'.formatter.formatDate'}"
+                                                />
+
+                                                 <Label
+                                                    text="{i18n>busScenerio}"
+                                                />
+
+                                                <Text
+                                                    text="{path: 'DetailModel>/BusinessScenario'}"
+                                                />
+
+                                                 <Label
+                                                    text="{i18n>lastUpdatedOn}"
+                                                />
+
+                                               <Text text="{path: 'DetailModel>/LastUpdatedOn', formatter:'.formatter.formatDate'}" wrapping="false" />
+                                                 <Label
+                                                    text="{i18n>lastUpdatedOnTime}"
+                                                />
+
+                                               <Text text="{path: 'DetailModel>/LastUpdatedTime', formatter:'.formatter.formatTime'}" wrapping="false" />
+
+                                                <core:Title />
+                                                <Label
+                                                    text="{i18n>fpdStatus}"
+                                                />
+                                                <Text
+                                                    text="{DetailModel>/FpdStatus}"
+                                                />
+                                                 <Label
+                                                    text="{i18n>fpdFinalPrice}"
+                                                />
+                                                <Text
+                                                    text="{DetailModel>/FpdFinalPrice}"
+                                                />
+                                                 <Label
+                                                    text="{i18n>nonNegoPrice}"
+                                                />
+                                                <Text
+                                                    text="{DetailModel>/Finalprice_Pricefx}"
+                                                />
+                                                <Label
+                                                    text="{i18n>salesOrderStock}"
+                                                />
+                                                <Text
+                                                    text="{DetailModel>/SalesOrderStock}"
+                                                />
+                                                <Label text="{i18n>sto}" />
+                                                <Text
+                                                    text="{DetailModel>/Sto}"
+                                                />
+                                                <Label
+                                                    text="{i18n>stoDelvItem}"
+                                                />
+                                                <Text
+                                                    text="{DetailModel>/StoItem}"
+                                                />
+                                                <Label text="{i18n>stoDelv}" />
+                                                <Text
+                                                    text="{DetailModel>/StoDelv}"
+                                                />
+                                                 <Label text="{i18n>stoDelvItem}" />
+                                                <Text
+                                                    text="{DetailModel>/StoDelvItem}"
+                                                />
+
+                                                <Label
+                                                    text="{i18n>priceDate}"
+                                                />
+
+                                                <Text
+                                                    text="{path: 'DetailModel>/PricedDate', formatter:'.formatter.formatDate'}"
+                                                />
+                                                 <Label text="{i18n>contract}" />
+                                                <Text
+                                                    text="{DetailModel>/Contract}"
+                                                />
+                                                <Label text="{i18n>contractType}" />
+                                                <Text
+                                                    text="{DetailModel>/ContractType}"
+                                                />
+
+                                                <Label text="{i18n>contractValidFrom}" />
+                                                <Text
+                                                    text="{DetailModel>/ContractValidFrom}"
+                                                />
+
+                                                <Label text="{i18n>contractValidTo}" />
+                                                <Text
+                                                    text="{DetailModel>/ContractValidTo}"
+                                                />
+
+                                                
+
+                                                <Label text="{i18n>contractItem}" />
+                                                <Text
+                                                    text="{DetailModel>/ContractItem}"
+                                                />
+
+                                                <Label text="{i18n>salesOrgName}" />
+                                                <Text
+                                                    text="{DetailModel>/SalesOrgName}"
+                                                />
+
+                                                <Label text="{i18n>distributionChannel}" />
+                                                <Text
+                                                    text="{DetailModel>/DistributionChannel}"
+                                                />
+
+                                                <Label text="{i18n>distributionChannelName}" />
+                                                <Text
+                                                    text="{DetailModel>/DistributionChannelName}"
+                                                />
+
+                                                <Label text="{i18n>divisionName}" />
+                                                <Text
+                                                    text="{DetailModel>/DivisionName}"
+                                                />
+
+                                                <Label text="{i18n>salesOffice}" />
+                                                <Text
+                                                    text="{DetailModel>/SalesOffice}"
+                                                />
+
+                                                <Label text="{i18n>salesOfficeDesc}" />
+                                                <Text
+                                                    text="{DetailModel>/SalesOfficeDesc}"
+                                                />
+
+                                                <Label text="{i18n>salesGroup}" />
+                                                <Text
+                                                    text="{DetailModel>/SalesGroup}"
+                                                />
+
+                                                <Label text="{i18n>salesGroupName}" />
+                                                <Text
+                                                    text="{DetailModel>/SalesGroupName}"
+                                                />
+
+                                                <Label text="{i18n>salesDistrict}" />
+                                                <Text
+                                                    text="{DetailModel>/SalesDistrict}"
+                                                />
+
+                                                <Label text="{i18n>salesDistrictName}" />
+                                                <Text
+                                                    text="{DetailModel>/SalesDistrictName}"
+                                                />
+
+                                                <Label text="{i18n>reqDelvDate}" />
+                                                 <Text
+                                                    text="{path: 'DetailModel>/ReqDelvDate', formatter:'.formatter.formatDate'}"/>
+                                              
+
+                                                <Label text="{i18n>soldToName}" />
+                                                <Text
+                                                    text="{DetailModel>/SoldToName}"
+                                                />
+
+                                                <Label text="{i18n>shipToName}" />
+                                                <Text
+                                                    text="{DetailModel>/ShipToName}"
+                                                />
+
+                                                <Label text="{i18n>shipToCity}" />
+                                                <Text
+                                                    text="{DetailModel>/ShipToCity}"
+                                                />
+
+                                                <Label text="{i18n>shipToRegion}" />
+                                                <Text
+                                                    text="{DetailModel>/ShipToRegion}"
+                                                />
+                                                <Label text="{i18n>csrNumber}" />
+                                                <Text
+                                                    text="{DetailModel>/CsrNumber}"
+                                                />
+                                                <Label text="{i18n>csrName}" />
+                                                <Text
+                                                    text="{DetailModel>/CsrName}"
+                                                />
+                                                  <Label text="{i18n>inco1}" />
+                                                <Text
+                                                    text="{DetailModel>/Inco1}"
+                                                />
+                                                  <Label text="{i18n>inco2}" />
+                                                <Text
+                                                    text="{DetailModel>/Inco2}"
+                                                />
+                                            </f:content>
+                                        </f:SimpleForm>
+                                    </o:ObjectPageSubSection>
+                                </o:subSections>
+                            </o:ObjectPageSection>
+                        </o:sections>
+                    </o:ObjectPageLayout>
+                </content>
+            </Page>
+        </pages>
+    </App>
+</mvc:View>

@@ -1,0 +1,38 @@
+<core:FragmentDefinition
+	xmlns="sap.ui.comp.valuehelpdialog"
+	xmlns:m="sap.m"
+	xmlns:fb="sap.ui.comp.filterbar"
+	xmlns:core="sap.ui.core">
+	<ValueHelpDialog
+		title="{i18n>formulaKey}"
+		ok=".onValueHelpOkPress"
+		cancel=".onValueHelpCancelPress"
+		supportRanges="true"
+		key="FKEY"
+		descriptionKey="FDESC">
+		<filterBar>
+			<fb:FilterBar advancedMode="true" search=".onFilterBarSearch" isRunningInValueHelpDialog="true">
+				<fb:filterGroupItems>
+					<fb:FilterGroupItem
+						groupName="__$INTERNAL$"
+						name="FKEY"
+						label="{i18n>formulaKey}"
+						visibleInFilterBar="true">
+						<fb:control>
+							<m:Input name="FKEY" />
+						</fb:control>
+					</fb:FilterGroupItem>
+					<fb:FilterGroupItem
+						groupName="__$INTERNAL$"
+						name="FDESC"
+						label=""
+						visibleInFilterBar="true">
+						<fb:control>
+							<m:Input name="FDESC" />
+						</fb:control>
+					</fb:FilterGroupItem>
+				</fb:filterGroupItems>
+			</fb:FilterBar>
+		</filterBar>
+	</ValueHelpDialog>
+</core:FragmentDefinition>

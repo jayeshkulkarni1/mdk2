@@ -1,0 +1,38 @@
+<core:FragmentDefinition
+	xmlns="sap.ui.comp.valuehelpdialog"
+	xmlns:m="sap.m"
+	xmlns:fb="sap.ui.comp.filterbar"
+	xmlns:core="sap.ui.core">
+	<ValueHelpDialog
+		title="{i18n>salesOffice}"
+		ok=".onValueHelpOkPress"
+		cancel=".onValueHelpCancelPress"
+		supportRanges="true"
+		key="Vkbur"
+		descriptionKey="Bezei">
+		<filterBar>
+			<fb:FilterBar advancedMode="true" search=".onFilterBarSearch" isRunningInValueHelpDialog="true">
+				<fb:filterGroupItems>
+					<fb:FilterGroupItem
+						groupName="__$INTERNAL$"
+						name="Vkbur"
+						label="{i18n>salesOffice}"
+						visibleInFilterBar="true">
+						<fb:control>
+							<m:Input name="Vkbur" />
+						</fb:control>
+					</fb:FilterGroupItem>
+					<fb:FilterGroupItem
+						groupName="__$INTERNAL$"
+						name="Bezei"
+						label="{i18n>name}"
+						visibleInFilterBar="true">
+						<fb:control>
+							<m:Input name="Bezei" />
+						</fb:control>
+					</fb:FilterGroupItem>
+				</fb:filterGroupItems>
+			</fb:FilterBar>
+		</filterBar>
+	</ValueHelpDialog>
+</core:FragmentDefinition>

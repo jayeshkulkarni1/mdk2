@@ -1,0 +1,59 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:mvc="sap.ui.core.mvc" xmlns:sap.ui.fl="sap.ui.fl"
+	xmlns:core="sap.ui.core">
+	<Dialog
+		id="callForChinaDialog"
+		title="{i18n>updateFinalPricChina}" contentWidth="750px" contentHeight="420px">
+		<content>
+		<Table
+					 sap.ui.fl:flexibility="sap/m/flexibility/EngineFlex"
+					inset="false" autoPopinMode="true" growing="true" growingThreshold="15" fixedLayout="false"
+					items="{
+						path: 'callForPriceChinaDialogModel>/'
+					}" 
+				>
+				<columns>
+						<Column minScreenWidth="Tablet" demandPopin="true">
+							<Text text="{i18n>salesOrder}"/>
+						</Column>
+						<Column minScreenWidth="Tablet" demandPopin="true" >
+							<Text text="{i18n>salesOrderItem}"/>
+						</Column>
+						<Column minScreenWidth="Tablet" demandPopin="true" >
+							<Text text="{i18n>callByDate}"/>
+						</Column>
+                        <Column minScreenWidth="Tablet" demandPopin="true" >
+							<Text text="{i18n>fpdFinalPrice}"/>
+						</Column>
+						
+						
+						</columns>
+						<items>
+						<ColumnListItem vAlign="Middle">
+							<cells>
+							
+								<Text text="{callForPriceChinaDialogModel>order}" />
+								<Text text="{callForPriceChinaDialogModel>item}" />
+								<DatePicker value="{callForPriceChinaDialogModel>date}" editable="true"  minDate="{callForPriceChinaDialogModel>minDate}" valueFormat="yyyy-MM-dd" displayFormat="dd.MM.yyyy"/>
+									<Input value="{callForPriceChinaDialogModel>finalPrice}" />
+									</cells>
+									</ColumnListItem>
+									</items>
+				</Table>
+			
+				
+			
+		</content>
+		  <beginButton>
+   <Button text="{i18n>ok}" press="UpdatePriceChina" />
+  </beginButton>
+  <endButton>
+   <Button text="{i18n>cancel}" press="closeUpdateCallByDate" />
+  </endButton>
+		
+	</Dialog>
+</core:FragmentDefinition>
+
+

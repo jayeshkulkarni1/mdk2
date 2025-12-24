@@ -1,0 +1,51 @@
+<core:FragmentDefinition
+	xmlns="sap.ui.comp.valuehelpdialog"
+	xmlns:m="sap.m"
+	xmlns:fb="sap.ui.comp.filterbar"
+	xmlns:core="sap.ui.core">
+	<ValueHelpDialog
+		title="{i18n>contractNum}"
+		ok=".onValueHelpOkPressContract"
+		cancel=".onValueHelpCancelPress"
+		supportRanges="false" supportMultiselect="true" 
+		key="ContractNumber" descriptionKey="Item"
+		>
+		<filterBar>
+			<fb:FilterBar advancedMode="true" search=".onFilterBarSearch" isRunningInValueHelpDialog="true">
+				<fb:filterGroupItems>
+					<fb:FilterGroupItem
+						groupName="__$INTERNAL$"
+						name="ContractNumber"
+						label="{i18n>contractNum}"
+						visibleInFilterBar="true">
+						<fb:control>
+							<m:Input name="ContractNumber" />
+						</fb:control>
+					</fb:FilterGroupItem>
+                    <fb:FilterGroupItem
+						groupName="__$INTERNAL$"
+						name="Item"
+						label="{i18n>itemNumberofsdDoc}"
+						visibleInFilterBar="true">
+						<fb:control>
+							<m:Input name="Item" />
+						</fb:control>
+					</fb:FilterGroupItem>
+					 <!-- Begin the code.
+            PCN#419 - Adding validation for MosSchdQty field
+            Work Bench TR - DA1K923658 -->
+					  <fb:FilterGroupItem
+						groupName="__$INTERNAL$"
+						name="openQty"
+						label="{i18n>openQty}"
+						visibleInFilterBar="true">
+						<fb:control>
+							<m:Input name="openQty" />
+						</fb:control>
+					</fb:FilterGroupItem>
+					<!-- End the code -->
+				</fb:filterGroupItems>
+			</fb:FilterBar>
+		</filterBar>
+	</ValueHelpDialog>
+</core:FragmentDefinition>

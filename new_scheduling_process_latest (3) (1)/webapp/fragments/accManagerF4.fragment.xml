@@ -1,0 +1,38 @@
+<core:FragmentDefinition
+	xmlns="sap.ui.comp.valuehelpdialog"
+	xmlns:m="sap.m"
+	xmlns:fb="sap.ui.comp.filterbar"
+	xmlns:core="sap.ui.core">
+	<ValueHelpDialog
+		title="{i18n>accMgr}"
+		ok=".onValueHelpOkPress"
+		cancel=".onValueHelpCancelPress"
+		supportRanges="true"
+		key="KUNNR"
+		descriptionKey="NAME">
+		<filterBar>
+			<fb:FilterBar advancedMode="true" search=".onFilterBarSearch" isRunningInValueHelpDialog="true">
+				<fb:filterGroupItems>
+					<fb:FilterGroupItem
+						groupName="__$INTERNAL$"
+						name="KUNNR"
+						label="{i18n>accMgr}"
+						visibleInFilterBar="true">
+						<fb:control>
+							<m:Input name="KUNNR" />
+						</fb:control>
+					</fb:FilterGroupItem>
+					<fb:FilterGroupItem
+						groupName="__$INTERNAL$"
+						name="NAME"
+						label=""
+						visibleInFilterBar="true">
+						<fb:control>
+							<m:Input name="NAME" />
+						</fb:control>
+					</fb:FilterGroupItem>
+				</fb:filterGroupItems>
+			</fb:FilterBar>
+		</filterBar>
+	</ValueHelpDialog>
+</core:FragmentDefinition>

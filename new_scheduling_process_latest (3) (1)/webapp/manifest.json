@@ -1,0 +1,293 @@
+{
+    "_version": "1.48.0",
+    "sap.app": {
+        "id": "schedulingprocess.schedulingprocess",
+        "type": "application",
+        "i18n": "i18n/i18n.properties",
+        "applicationVersion": {
+            "version": "0.0.1"
+        },
+        "title": "{{appTitle}}",
+        "description": "{{appDescription}}",
+        "resources": "resources.json",
+        "sourceTemplate": {
+            "id": "@sap/generator-fiori:basic",
+            "version": "1.10.5",
+            "toolsId": "e8f0d926-3225-4360-b918-67c09a87d19a"
+        },
+        "dataSources": {
+            "mainService": {
+                "uri": "/sap/opu/odata/sap/ZGW_OTC_SCHEDULING_SRV/",
+                "type": "OData",
+                "settings": {
+                    "annotations": [],
+                    "localUri": "localService/metadata.xml",
+                    "odataVersion": "2.0"
+                }
+            },
+            "quotaService": {
+                "uri": "/sap/opu/odata/sap/zgw_otc_quota_sch_e491_srv/",
+                "type": "OData",
+                "settings": {
+                    "annotations": [],
+                    "localUri": "localService/metadata.xml",
+                    "odataVersion": "2.0"
+                }
+            },
+            "orderService": {
+                "uri": "/sap/opu/odata/SAP/ZGW_OTC_E522_AUTO_SO_SRV/",
+                "type": "OData",
+                "settings": {
+                    "annotations": [],
+                    "localUri": "localService/metadata.xml",
+                    "odataVersion": "2.0"
+                }
+            },
+            "searchHelpService": {
+                "uri": "/sap/opu/odata/SAP/ZGW_OTC_QUOTA_SCH_E491_SRV/",
+                "type": "OData",
+                "settings": {
+                    "annotations": [],
+                    "localUri": "localService/metadata.xml",
+                    "odataVersion": "2.0"
+                }
+            },
+            "searchHelpsServiceForViewO9Data": {
+                "uri": "/sap/opu/odata/SAP/ZGW_OTC_CONTRACT_SELECT_SRV/",
+                "type": "OData",
+                "settings": {
+                    "annotations": [],
+                    "localUri": "localService/metadata.xml",
+                    "odataVersion": "2.0"
+                }
+            },
+            "contractSelectionService": {
+                "uri": "/sap/opu/odata/SAP/ZGW_OTC_CONTRACT_SELECT_SRV/",
+                "type": "OData",
+                "settings": {
+                    "annotations": [],
+                    "localUri": "localService/metadata.xml",
+                    "odataVersion": "2.0"
+                }
+            }
+        }
+    },
+    "sap.ui": {
+        "technology": "UI5",
+        "fullWidth": true,
+        "icons": {
+            "icon": "",
+            "favIcon": "",
+            "phone": "",
+            "phone@2": "",
+            "tablet": "",
+            "tablet@2": ""
+        },
+        "deviceTypes": {
+            "desktop": true,
+            "tablet": true,
+            "phone": true
+        }
+    },
+    "sap.ui5": {
+        "flexEnabled": false,
+        "dependencies": {
+            "minUI5Version": "1.108.0",
+            "libs": {
+                "sap.m": {},
+                "sap.ui.core": {},
+                "sap.f": {},
+                "sap.suite.ui.generic.template": {},
+                "sap.ui.comp": {},
+                "sap.ui.generic.app": {},
+                "sap.ui.table": {},
+                "sap.ushell": {}
+            }
+        },
+        "contentDensities": {
+            "compact": true,
+            "cozy": true
+        },
+        "models": {
+            "i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "settings": {
+                    "bundleName": "schedulingprocess.schedulingprocess.i18n.i18n"
+                }
+            },
+            "ScheduleModel": {
+                "dataSource": "mainService",
+                "preload": true,
+                "settings": {}
+            },
+            "QuotaModel": {
+                "dataSource": "quotaService",
+                "preload": true,
+                "settings": {}
+            },
+            "ViewO9DataModel": {
+                "dataSource": "contractSelectionService",
+                "preload": true,
+                "settings": {}
+            },
+            "OrderModel": {
+                "dataSource": "orderService",
+                "preload": true,
+                "settings": {}
+            },
+            "SearchHelpModel": {
+                "dataSource": "searchHelpService",
+                "preload": true,
+                "settings": {}
+            },
+            "ViewSalesOrderStatusModel": {
+                "dataSource": "searchHelpService",
+                "preload": true,
+                "settings": {}
+            },
+            "SearchHelpModelForViewO9Data": {
+                "dataSource": "searchHelpsServiceForViewO9Data",
+                "preload": true,
+                "settings": {}
+            },
+            "ContractSelectionModel": {
+                "dataSource": "contractSelectionService",
+                "preload": true,
+                "settings": {}
+            }
+        },
+        "resources": {
+            "css": [
+                {
+                    "uri": "css/style.css"
+                }
+            ],
+            "js": [
+                {
+                    "uri": "model/excel.js"
+                }
+            ]
+        },
+        "routing": {
+            "config": {
+                "routerClass": "sap.m.routing.Router",
+                "viewType": "XML",
+                "async": true,
+                "viewPath": "schedulingprocess.schedulingprocess.view",
+                "controlAggregation": "pages",
+                "controlId": "app",
+                "clearControlAggregation": false
+            },
+            "routes": [
+                {
+                    "name": "RouteSchedulingPtocess",
+                    "pattern": ":?query:",
+                    "target": [
+                        "TargetSchedulingPtocess"
+                    ]
+                },
+                {
+                    "name": "OrderRequest",
+                    "pattern": "OrderRequest",
+                    "target": "TargetOrderRequest"
+                },
+                {
+                    "name": "QuotaTable",
+                    "pattern": "QuotaTable",
+                    "target": "TargetQuotaTable"
+                },
+                {
+                    "name": "ViewO9Data",
+                    "pattern": "ViewO9Data",
+                    "target": "TargetViewO9Data"
+                },
+                {
+                    "name": "ViewOpenContracts",
+                    "pattern": "ViewOpenContracts",
+                    "target": "TargetViewOpenContracts"
+                },
+                {
+                    "name": "OpenContracts",
+                    "pattern": "OpenContracts",
+                    "target": "TargetOpenContracts"
+                },
+                {
+                    "name": "ContractSelection",
+                    "pattern": "ContractSelection",
+                    "target": "TargetContractSelection"
+                },
+                {
+                    "name": "ViewSalesOrderStatus",
+                    "pattern": "ViewSalesOrderStatus",
+                    "target": "TargetViewSalesOrderStatus"
+                }
+
+            ],
+            "targets": {
+                "TargetSchedulingPtocess": {
+                    "viewType": "XML",
+                    "transition": "slide",
+                    "clearControlAggregation": false,
+                    "viewId": "SchedulingPtocess",
+                    "viewName": "SchedulingPtocess"
+                },
+                "TargetOrderRequest": {
+                    "viewType": "XML",
+                    "transition": "slide",
+                    "clearControlAggregation": false,
+                    "viewId": "OrderRequest",
+                    "viewName": "OrderRequest"
+                },
+                "TargetQuotaTable": {
+                    "viewType": "XML",
+                    "transition": "slide",
+                    "clearControlAggregation": false,
+                    "viewId": "QuotaTable",
+                    "viewName": "QuotaTable"
+                },
+                "TargetViewO9Data": {
+                    "viewType": "XML",
+                    "transition": "slide",
+                    "clearControlAggregation": false,
+                    "viewId": "ViewO9Data",
+                    "viewName": "ViewO9Data"
+                },
+                "TargetViewOpenContracts": {
+                    "viewType": "XML",
+                    "transition": "slide",
+                    "clearControlAggregation": false,
+                    "viewId": "ViewOpenContracts",
+                    "viewName": "ViewOpenContracts"
+                },
+                "TargetOpenContracts": {
+                    "viewType": "XML",
+                    "transition": "slide",
+                    "clearControlAggregation": false,
+                    "viewId": "OpenContracts",
+                    "viewName": "OpenContracts"
+                },
+                "TargetContractSelection": {
+                    "viewType": "XML",
+                    "transition": "slide",
+                    "clearControlAggregation": false,
+                    "viewId": "ContractSelection",
+                    "viewName": "ContractSelection"
+                },
+                "TargetViewSalesOrderStatus": {
+                    "viewType": "XML",
+                    "transition": "slide",
+                    "clearControlAggregation": false,
+                    "viewId": "ViewSalesOrderStatus",
+                    "viewName":"ViewSalesOrderStatus"
+                }
+
+            }
+        },
+        "rootView": {
+            "viewName": "schedulingprocess.schedulingprocess.view.App",
+            "type": "XML",
+            "async": true,
+            "id": "App"
+        }
+    }
+}

@@ -1,0 +1,38 @@
+<core:FragmentDefinition
+	xmlns="sap.ui.comp.valuehelpdialog"
+	xmlns:m="sap.m"
+	xmlns:fb="sap.ui.comp.filterbar"
+	xmlns:core="sap.ui.core">
+	<ValueHelpDialog
+		title="{i18n>incoClass}"
+		ok=".onValueHelpOkPress"
+		cancel=".onValueHelpCancelPress"
+		supportRanges="true"
+		key="INCOTERMSCLASSIFICATION"
+		descriptionKey="Incotermsclassificationname">
+		<filterBar>
+			<fb:FilterBar advancedMode="true" search=".onFilterBarSearch" isRunningInValueHelpDialog="true">
+				<fb:filterGroupItems>
+					<fb:FilterGroupItem
+						groupName="__$INTERNAL$"
+						name="INCOTERMSCLASSIFICATION"
+						label="{i18n>incoClass}"
+						visibleInFilterBar="true">
+						<fb:control>
+							<m:Input name="INCOTERMSCLASSIFICATION" />
+						</fb:control>
+					</fb:FilterGroupItem>
+					<fb:FilterGroupItem
+						groupName="__$INTERNAL$"
+						name="Description"
+						label=""
+						visibleInFilterBar="true">
+						<fb:control>
+							<m:Input name="Incotermsclassificationname" />
+						</fb:control>
+					</fb:FilterGroupItem>
+				</fb:filterGroupItems>
+			</fb:FilterBar>
+		</filterBar>
+	</ValueHelpDialog>
+</core:FragmentDefinition>

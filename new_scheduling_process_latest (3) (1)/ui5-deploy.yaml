@@ -1,0 +1,22 @@
+specVersion: "2.6"
+metadata:
+  name: schedulingprocess.schedulingprocess
+type: application
+builder:
+  resources:
+    excludes:
+      - /test/**
+      - /localService/**
+  customTasks:
+    - name: deploy-to-abap
+      afterTask: generateCachebusterInfo
+      configuration:
+        target:
+          destination: DA1-FIORI
+          url: http://da1s4hana:8000
+        app:
+          name: Z_SCHEDULE_PRC
+          package: ZOTC_E491
+          transport: DA1K931427
+        exclude:
+          - /test/

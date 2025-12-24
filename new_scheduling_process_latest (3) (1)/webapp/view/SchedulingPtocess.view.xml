@@ -1,0 +1,646 @@
+<mvc:View controllerName="schedulingprocess.schedulingprocess.controller.SchedulingPtocess" height="100%" xmlns:mvc="sap.ui.core.mvc" xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:f="sap.f" xmlns:fb="sap.ui.comp.filterbar"  xmlns:table="sap.ui.table" xmlns:svm="sap.ui.comp.smartvariants">
+    <f:DynamicPage headerExpanded="{/headerExpanded}" showFooter="true">
+        <f:title>
+            <f:DynamicPageTitle>
+                <f:heading>
+                    <Title text="{i18n>appTitle}"/>
+                </f:heading>
+                <f:expandedContent>
+                    <svm:SmartVariantManagement id="svm" class="sapUiSmallMarginBegin" showExecuteOnSelection="true"/>
+                </f:expandedContent>
+            </f:DynamicPageTitle>
+        </f:title>
+        <f:header>
+            <f:DynamicPageHeader>
+                <f:content>
+                    <fb:FilterBar id="mainPagefilterbar" persistencyKey="myPersKey" useToolbar="false" search=".onSearch" filterChange=".onFilterChange" afterVariantLoad=".onAfterVariantLoad">
+                        <fb:filterGroupItems>
+                            <!-- Begin the code -->
+                            <!-- Workbench TR : DA1K909941
+                                  OTC_I655 New week filter  added as part of new changes  -->
+                                <fb:FilterGroupItem name="Week" label="{i18n>weekNumber}" groupName="Group1" visibleInFilterBar="true"> <fb:control>
+                                    <MultiInput id="weekInput" showSuggestion="false" width="100%" showValueHelp="true" valueHelpOnly="false" valueHelpRequest="handleSingleWeekF4" required="true"/>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+                            <!-- End of the code -->
+                            <fb:FilterGroupItem name="Account Manager" label="{i18n>accMgr}" groupName="Group1" visibleInFilterBar="true">
+                                <fb:control>
+                                    <MultiInput id="accMngInput" value="{FiltersModel>/AccountManager}" valueHelpRequest=".handleAccManagerF4" valueHelpOnly="true" required="true">
+                                        <core:Item key="{key}" text="{name}"/>
+                                    </MultiInput>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+
+                            <fb:FilterGroupItem name="Plant" label="{i18n>plant}" id="plantFilter" groupName="Group1" visibleInFilterBar="true" visible="true" >
+                                <fb:control>
+                                    <MultiInput id="plantInput" value="{FiltersModel>/Plant}" name="Plant" valueHelpRequest=".handlePlantF4" valueHelpOnly="true">
+                                        <core:Item key="{key}" text="{name}"/>
+                                    </MultiInput>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+                            <!-- Begin the code -->
+                            <!-- Workbench TR : DA1K909941
+                                  OTC_I655 New input field margin  added as part of new changes  -->
+                            <fb:FilterGroupItem name="Margin" label="{i18n>margin}" groupName="Group1" visibleInFilterBar="true">
+                                <fb:control>
+                                    <Input id="marginInput" value=""></Input>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+                            <!-- End the code -->
+                            <fb:FilterGroupItem name="Plant Group" label="{i18n>plantgrp}" groupName="Group1" visibleInFilterBar="true">
+                                <fb:control>
+                                    <MultiInput id="plantGroupInput" value="{FiltersModel>/PlantGroup}" name="{i18n>plantgrp}" change="onSelectionChange" valueHelpRequest=".handlePlantGroupF4" valueHelpOnly="true">
+                                        <core:Item key="{key}" text="{name}"/>
+                                    </MultiInput>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+                            <fb:FilterGroupItem name="Formula" label="{i18n>formulaKey}" groupName="Group1" visibleInFilterBar="true">
+                                <fb:control>
+                                    <MultiInput id="formulaKeyInput" value="{FiltersModel>/FormulaKey}" name="{i18n>formulaKey}" change="onSelectionChange" valueHelpRequest=".handleFormulaKeyF4" valueHelpOnly="true">
+                                        <core:Item key="{key}" text="{name}"/>
+                                    </MultiInput>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+                            <fb:FilterGroupItem name="Customer" label="{i18n>customer}" groupName="Group1" visibleInFilterBar="true">
+                                <fb:control>
+                                    <MultiInput id="customerInput" value="{FiltersModel>/Customer}" name="{i18n>customer}" change="onSelectionChange" valueHelpRequest=".handleCustomerF4" valueHelpOnly="true">
+                                        <core:Item key="{key}" text="{name}"/>
+                                    </MultiInput>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+                            <fb:FilterGroupItem name="Material" label="{i18n>matnr}" groupName="Group1" visibleInFilterBar="true">
+                                <fb:control>
+                                    <MultiInput id="materialInput" value="{FiltersModel>/Material}" name="{i18n>material}" change="onSelectionChange" valueHelpRequest=".handleMaterialF4" valueHelpOnly="true">
+                                        <core:Item key="{key}" text="{name}"/>
+                                    </MultiInput>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+                            <fb:FilterGroupItem name="Layout" label="{i18n>layout}" groupName="Group1" visibleInFilterBar="true">
+                                <fb:control>
+                                    <MultiComboBox name="Layout" id="layout" showSelectAll="true" items="{	path: 'LocalModel>/Columns'}">
+                                        <core:Item key="{LocalModel>ID}" text="{LocalModel>Text}"/>
+                                    </MultiComboBox>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+                        </fb:filterGroupItems>
+                    </fb:FilterBar>
+                </f:content>
+            </f:DynamicPageHeader>
+        </f:header>
+        <f:content>
+            <table:Table id="table" visible="false" selectionMode="None" filter="onFilterScheduleTable" rows="{TableScheduleModel>/results}" enableCellFilter="true">
+                <table:extension>
+                    <OverflowToolbar>
+                        <Title text="Items({= ${TableScheduleModel>/results}.length})" level="H2"/>
+                        <ToolbarSpacer/>
+                        <!-- Begin the code -->
+                        <!-- PCN_487_OTC_E491: Workbench TR : DA1K928135
+                         New View SalesOrder status button  added as part of new changes   -->
+                        <Button text="{i18n>viewSalesOrderStatus}" press="onViewSalesOrderStatusPress" id="openViewSalesOrderStatusUiTable" visible="true"/> 
+                        <!-- End the code PCN_487_OTC_E491: Workbench TR : DA1K928135
+                         New View SalesOrder status button  added as part of new changess  -->
+                        <!-- Begin the code -->
+                        <!-- OTC_I655: Workbench TR : DA1K909941
+                         New Open Contracts button  added as part of new changes   -->
+                        <Button text="{i18n>ViewOpenContracts}" press="onViewOpenContractsPress" id="openContractUiTable" visible="true"/> <!-- OTC_I655: Workbench TR : DA1K909941
+                         End of Code for Open Contracts button added as part of new changes  -->
+
+
+                        <!-- OTC_I658: Workbench TR : DA1K909941
+                           New Button for View O9 Data functionality added as part of new changes -->
+                        <Button
+                        text="{i18n>viewO9Data}" press="onViewO9DataDetails" id="viewO9" visible="true"/> <!-- End of the code -->
+                        <Button text="{i18n>viewQuotDetails}" press="onQuotaDetails" id="quotaDetails" visible="true"/>
+                        <Button text="{i18n>executeCutingLogic}" press="openExecuteCuttingDialog" id="executeCutting" visible="false"/>
+                        <!-- Begin the code -->
+                        <!-- Workbench TR : DA1K909941
+                                        OTC_I655 New name added as part of new changes  -->
+                        <Button
+                        text="{i18n>automateContSel}" press="onContractSelectionPress" id="contractSelection" visible="true"/> <!-- End the code -->
+                        <Button text="{i18n>automateOrdrCreat}" press="onOrderCreationPress" id="orderCreation" visible="true"/>  
+                        <Input width="12rem" placeholder="{i18n>fixedcolumncount}" tooltip="{i18n>fixedcolumncount}" liveChange="onColumnFreeze"/>
+
+                        <Button icon="sap-icon://refresh" tooltip="{i18n>refresh}" press="onSearch"/>
+                        <Button icon="sap-icon://excel-attachment" press="onExport"/>
+                    </OverflowToolbar>
+                </table:extension>
+                <table:columns>
+                    <table:Column width="9rem" id="Week" filterProperty="Week">
+                        <Label text="{i18n>week}"/>
+
+                        <table:template>
+                            <Text text="{TableScheduleModel>Week}"/>
+                        </table:template>
+                    </table:Column>
+
+                    <table:Column width="9rem" id="ManagerId" filterProperty="ManagerId">
+                        <Label text="{i18n>accountMngID}"/>
+                        <table:template>
+                            <Text text="{TableScheduleModel>ManagerId}"/>
+                        </table:template>
+                    </table:Column>
+
+                    <table:Column width="15rem" id="AccMngName" filterProperty="AccMngName">
+                        <Label text="{i18n>accountMngName}"/>
+
+                        <table:template>
+                            <Text text="{TableScheduleModel>AccMngName}"/>
+                        </table:template>
+                    </table:Column>
+
+                    <table:Column width="9rem" id="NetworkPlant" filterProperty="NetworkPlant">
+                        <Label text="{i18n>netwrkOfPlant}"/>
+
+                        <table:template>
+                            <Text text="{TableScheduleModel>NetworkPlant}"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="7rem" id="Plant" filterProperty="Plant">
+                        <Label text="{i18n>plant}"/>
+
+                        <table:template>
+                            <Text text="{TableScheduleModel>Plant}"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="9rem" id="CustomerId" filterProperty="CustomerId">
+                        <Label text="{i18n>soldToPartyID}"/>
+
+                        <table:template>
+                            <Text text="{TableScheduleModel>CustomerId}"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="15rem" id="SoldToName" filterProperty="SoldToName">
+                        <Label text="{i18n>soldToPrtyName}"/>
+
+                        <table:template>
+                            <Text text="{TableScheduleModel>SoldToName}"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="9rem" id="ShiptoId" filterProperty="ShiptoId">
+                        <Label text="{i18n>shipTo}"/>
+
+                        <table:template>
+                            <Text text="{TableScheduleModel>ShiptoId}"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="15rem" id="ShipToName" filterProperty="ShipToName">
+                        <Label text="{i18n>shipToName}"/>
+
+                        <table:template>
+                            <Text text="{TableScheduleModel>ShipToName}"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="15rem" id="CreditLimit" filterProperty="CreditLimit">
+                        <Label text="{i18n>totalAvailCredLmt}"/>
+                        <!-- Begin the code 
+                    Work Bench TR : DA1K924785
+                   GPT- 37612 Adding formatter method to update creditlimit value as per UKMBP_CMS_SGM Table format -->
+                        <table:template>
+                         <Text text="{path: 'TableScheduleModel>CreditLimit', formatter: '.formatter.QtyFormatting'}" />
+                        </table:template>
+                        <!-- End the code -->
+                    </table:Column>
+
+                    <table:Column width="9rem" id="Material" filterProperty="Material">
+                        <Label text="{i18n>matnr}"/>
+
+                        <table:template>
+                            <Text text="{TableScheduleModel>Material}"/>
+                        </table:template>
+                    </table:Column>
+
+                    <table:Column width="15rem" id="MaterialDesc" filterProperty="MaterialDesc">
+                        <Label text="{i18n>matnrDesc}"/>
+
+                        <table:template>
+                            <Text text="{TableScheduleModel>MaterialDesc}"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="7rem" id="FormulaKey" filterProperty="FormulaKey">
+                        <Label text="{i18n>formulaKey}"/>
+
+                        <table:template>
+                            <Text text="{TableScheduleModel>FormulaKey}"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="11rem" id="FormulaKeyDesc" filterProperty="FormulaKeyDesc">
+                        <Label text="{i18n>formulaDesc}"/>
+
+                        <table:template>
+                            <Text text="{TableScheduleModel>FormulaKeyDesc}"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="11rem" id="Incoterms" filterProperty="Incoterms">
+                        <Label text="{i18n>incoTerm}"/>
+
+                        <table:template>
+                            <Text text="{TableScheduleModel>Incoterms}"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="11rem" id="BusinessScenario" filterProperty="BusinessScenario">
+                        <Label text="{i18n>businScen}"/>
+
+                        <table:template>
+                            <Text text="{path: 'TableScheduleModel>BusinessScenario', formatter: '.formatter.businessText'}"/>
+                        </table:template>
+                    </table:Column>
+                    <!-- Begin the code 
+                    Work Bench TR : DA1K912060
+                    New changes to add table column for Business Process -->
+                        <table:Column width="11rem" id="BusProcess" filterProperty="BusProcess">
+                        <Label text="{i18n>busProcess}"/>
+                        <table:template>
+                            <Text text="{TableScheduleModel>BusProcess}"/>
+                        </table:template>
+                    </table:Column>
+                    <!-- End the code -->
+
+                    <!-- BOC GPT - 39506 Adding formatter for Qty fields -->
+                    <table:Column width="11rem" id="OpenQty" filterProperty="OpenQty">
+                        <Label text="{i18n>openQty}"/>
+
+                        <table:template>
+                            <Text text="{path: 'TableScheduleModel>OpenQty', formatter: '.formatter.QtyFormatting'}" />
+                              
+                        </table:template>
+                    </table:Column>
+                    <!-- EOC GPT - 39506 Adding formatter for Qty fields -->
+                    <table:Column width="11rem" id="BlockedQty" filterProperty="BlockedQty">
+                        <Label text="{i18n>blkQty}"/>
+
+                        <table:template>
+                              <!-- BOC GPT - 39506 Adding formatter for Qty fields -->
+                            <Link text="{path: 'TableScheduleModel>BlockedQty', formatter: '.formatter.QtyFormatting'}" press="onBlockedQtyPress" id="BlockedQtyLink"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="11rem" id="BlockedReason" filterProperty="BlockedReason">
+                        <Label text="{i18n>blkreason}"/>
+
+                        <table:template>
+                            <Text text="{TableScheduleModel>BlockedReason}"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="11rem" id="ExpiredContractQty" filterProperty="ExpiredContractQty">
+                        <Label text="{i18n>expContQty}"/>
+
+                        <table:template>
+                           
+                             <Text text="{path: 'TableScheduleModel>ExpiredContractQty', formatter: '.formatter.QtyFormatting'}" />
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="11rem" id="FutureContractQty" filterProperty="FutureContractQty">
+                        <Label text="{i18n>futContQty}"/>
+
+                        <table:template>
+                           
+                            <Text text="{path: 'TableScheduleModel>FutureContractQty', formatter: '.formatter.QtyFormatting'}" />
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="11rem" id="AvlSchdQty" filterProperty="AvlSchdQty">
+                        <Label text="{i18n>availableToSchedule}"/>
+                        <table:template>
+                           
+                             <Text text="{path: 'TableScheduleModel>AvlSchdQty', formatter: '.formatter.QtyFormatting'}" />
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="11rem" id="PackedQty" filterProperty="PackedQty">
+                        <Label text="{i18n>packQty}"/>
+
+                        <table:template>
+                            
+                             <Text text="{path: 'TableScheduleModel>PackedQty', formatter: '.formatter.QtyFormatting'}" />
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="11rem" id="BulkQty" filterProperty="BulkQty">
+                        <Label text="{i18n>bulkQty}"/>
+
+                        <table:template>
+                            <Text text="{path: 'TableScheduleModel>BulkQty', formatter: '.formatter.QtyFormatting'}" />
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="11rem" id="QuotaO9" filterProperty="QuotaO9">
+                        <Label text="{i18n>quota}"/>
+
+                        <table:template>
+                            <HBox>
+                                      <Text text="{path: 'TableScheduleModel>QuotaO9', formatter: '.formatter.QtyFormatting'}" />
+                                <customData>
+                                    <core:CustomData key="colorClass" value="{ path:'TableScheduleModel>QuotaColor'}" writeToDom="true"/>
+                                </customData>
+                            </HBox>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="11rem" id="DhCustReqQty" hAlign="Center" filterProperty="DhCustReqQty">
+                        <Label text="{i18n>custReqQty}"/>
+
+                        <table:template>
+                            <Link text="{path: 'TableScheduleModel>DhCustReqQty', formatter: '.formatter.QtyFormatting'}" press="onDigitalHub" id="custReqQtyLink"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="11rem" id="ProtocolQty" filterProperty="ProtocolQty">
+                        <Label text="{i18n>protocolQtyReq}"/>
+
+                        <table:template>
+                         <Text text="{path: 'TableScheduleModel>ProtocolQty', formatter: '.formatter.QtyFormatting'}" />
+                           
+                        </table:template>
+                    </table:Column>
+                    <!-- Begin the code -->
+                    <!-- OTC_I655: Workbench TR : DA1K909941
+                                            New column added as part of new changes -->
+                    <table:Column width="11rem" id="MosSchdQty" filterProperty="MosSchdQty">
+                        <Label text="{i18n>MosSchdQty}"/>
+                        <table:template>
+                            <Input value="{TableScheduleModel>MosSchdQty}" enabled="{mosaicQtyColModel>/editable}" change="onMosQtyEntry" textFormatter=".formatter.QtyFormatting" />   
+                        </table:template>
+                    </table:Column>
+                    <!-- End the code -->
+                    <table:Column width="11rem" id="AmReqQty" filterProperty="AmReqQty">
+                        <Label text="{i18n>amReqQty}"/>
+                        <table:template>
+                           
+                             <Text text="{path: 'TableScheduleModel>AmReqQty', formatter: '.formatter.QtyFormatting'}" />
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="11rem" id="TotConfirmedQty" filterProperty="TotConfirmedQty">
+                        <Label text="{i18n>totConQty}"/>
+
+                        <table:template>
+                            <HBox>
+                              
+                                 <Text text="{path: 'TableScheduleModel>TotConfirmedQty', formatter: '.formatter.QtyFormatting'}" />
+                                <customData>
+                                    <core:CustomData key="colorClass" value="{ path:'TableScheduleModel>ConfQtyColor'}" writeToDom="true"/>
+                                </customData>
+                            </HBox>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="11rem" id="TotalBigBagQty" filterProperty="TotalBigBagQty">
+                        <Label text="{i18n>bigbagscif}"/>
+
+                        <table:template>
+                          <Text text="{path: 'TableScheduleModel>TotalBigBagQty', formatter: '.formatter.QtyFormatting'}" />
+                            
+                        </table:template>
+                    </table:Column>
+                    <!-- Begin the code
+                    GPT- 40874 Adding formatter for Qty fields 
+                    WorkBench TR : DA1K926169 -->
+                    <table:Column width="11rem" id="TotalSmallBagQty" filterProperty="TotalSmallBagQty">
+                        <Label text="{i18n>smallbagscif}"/>
+
+                        <table:template>
+                          <Text text="{path: 'TableScheduleModel>TotalSmallBagQty', formatter: '.formatter.QtyFormatting'}" />
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="11rem" id="TotalBulkQty" filterProperty="TotalBulkQty">
+                        <Label text="{i18n>bulkcif}"/>
+
+                        <table:template>
+                            <Text text="{path: 'TableScheduleModel>TotalBulkQty', formatter: '.formatter.QtyFormatting'}" />
+                        </table:template>
+                    </table:Column>
+
+                    <table:Column width="11rem" id="MonDeliveryQtyAm" filterProperty="MonDeliveryQtyAm">
+                        <Label text="{i18n>mon}"/>
+
+                        <table:template>
+                            <Text text="{path: 'TableScheduleModel>MonDeliveryQtyAm', formatter: '.formatter.QtyFormatting'}" />
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="11rem" id="BigBagsMonAm" filterProperty="BigBagsMonAm">
+                        <Label text="{i18n>bigbag}"/>
+
+                        <table:template>
+                             <Text text="{path: 'TableScheduleModel>BigBagsMonAm', formatter: '.formatter.QtyFormatting'}" />
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="11rem" id="SmallBagsMonAm" filterProperty="SmallBagsMonAm">
+                        <Label text="{i18n>smallbag}"/>
+
+                        <table:template>
+                            <Text text="{path: 'TableScheduleModel>SmallBagsMonAm', formatter: '.formatter.QtyFormatting'}" />
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="11rem" id="BulkMonAm" filterProperty="BulkMonAm">
+                        <Label text="{i18n>bulk}"/>
+
+                        <table:template>
+                          <Text text="{path: 'TableScheduleModel>BulkMonAm', formatter: '.formatter.QtyFormatting'}" />
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="11rem" id="TueDeliveryQtyAm" filterProperty="TueDeliveryQtyAm">
+                        <Label text="{i18n>tue}"/>
+
+                        <table:template>
+                             <Text text="{path: 'TableScheduleModel>TueDeliveryQtyAm', formatter: '.formatter.QtyFormatting'}" />
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="11rem" id="BigBagsTueAm" filterProperty="BigBagsTueAm">
+                        <Label text="{i18n>bigbag}"/>
+
+                        <table:template>
+                            <Text text="{path: 'TableScheduleModel>BigBagsTueAm', formatter: '.formatter.QtyFormatting'}" />
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="11rem" id="SmallBagsTueAm" filterProperty="SmallBagsTueAm">
+                        <Label text="{i18n>smallbag}"/>
+
+                        <table:template>
+                             <Text text="{path: 'TableScheduleModel>SmallBagsTueAm', formatter: '.formatter.QtyFormatting'}" />
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="11rem" id="BulkTueAm" filterProperty="BulkTueAm">
+                        <Label text="{i18n>bulk}"/>
+
+                        <table:template>
+                            <Text text="{path: 'TableScheduleModel>BulkTueAm', formatter: '.formatter.QtyFormatting'}" />
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="11rem" id="WedDeliveryQtyAm" filterProperty="WedDeliveryQtyAm">
+                        <Label text="{i18n>wed}"/>
+
+                        <table:template>
+                           <Text text="{path: 'TableScheduleModel>WedDeliveryQtyAm', formatter: '.formatter.QtyFormatting'}" />
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="11rem" id="BigBagsWedAm" filterProperty="BigBagsWedAm">
+                        <Label text="{i18n>bigbag}"/>
+
+                        <table:template>
+                            <Text text="{path: 'TableScheduleModel>BigBagsWedAm', formatter: '.formatter.QtyFormatting'}" />
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="11rem" id="SmallBagsWedAm" filterProperty="SmallBagsWedAm">
+                        <Label text="{i18n>smallbag}"/>
+
+                        <table:template>
+                           <Text text="{path: 'TableScheduleModel>SmallBagsWedAm', formatter: '.formatter.QtyFormatting'}" />
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="11rem" id="BulkWedAm" filterProperty="BulkWedAm">
+                        <Label text="{i18n>bulk}"/>
+
+                        <table:template>
+                            <Text text="{path: 'TableScheduleModel>BulkWedAm', formatter: '.formatter.QtyFormatting'}" />
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="11rem" id="ThuDeliveryQtyAm" filterProperty="ThuDeliveryQtyAm">
+                        <Label text="{i18n>thu}"/>
+
+                        <table:template>
+                            <Text text="{path: 'TableScheduleModel>ThuDeliveryQtyAm', formatter: '.formatter.QtyFormatting'}" />
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="11rem" id="BigBagsThuAm" filterProperty="BigBagsThuAm">
+                        <Label text="{i18n>bigbag}"/>
+
+                        <table:template>
+                          <Text text="{path: 'TableScheduleModel>BigBagsThuAm', formatter: '.formatter.QtyFormatting'}" />
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="11rem" id="SmallBagsThuAm" filterProperty="SmallBagsThuAm">
+                        <Label text="{i18n>smallbag}"/>
+
+                        <table:template>
+                           <Text text="{path: 'TableScheduleModel>SmallBagsThuAm', formatter: '.formatter.QtyFormatting'}" />
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="11rem" id="BulkThuAm" filterProperty="BulkThuAm">
+                        <Label text="{i18n>bulk}"/>
+
+                        <table:template>
+                            <Text text="{path: 'TableScheduleModel>BulkThuAm', formatter: '.formatter.QtyFormatting'}" />
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="11rem" id="FriDeliveryQtyAm" filterProperty="FriDeliveryQtyAm">
+                        <Label text="{i18n>fri}"/>
+
+                        <table:template>
+                            <Text text="{path: 'TableScheduleModel>FriDeliveryQtyAm', formatter: '.formatter.QtyFormatting'}" />
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="11rem" id="BigBagsFriAm" filterProperty="BigBagsFriAm">
+                        <Label text="{i18n>bigbag}"/>
+
+                        <table:template>
+                        <Text text="{path: 'TableScheduleModel>BigBagsFriAm', formatter: '.formatter.QtyFormatting'}" />
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="11rem" id="SmallBagsFriAm" filterProperty="SmallBagsFriAm">
+                        <Label text="{i18n>smallbag}"/>
+
+                        <table:template>
+                            <Text text="{path: 'TableScheduleModel>SmallBagsFriAm', formatter: '.formatter.QtyFormatting'}" />
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="11rem" id="BulkFriAm" filterProperty="BulkFriAm">
+                        <Label text="{i18n>bulk}"/>
+
+                        <table:template>
+                            <Text text="{path: 'TableScheduleModel>BulkFriAm', formatter: '.formatter.QtyFormatting'}" />
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="11rem" id="SatDeliveryQtyAm" filterProperty="SatDeliveryQtyAm">
+                        <Label text="{i18n>sat}"/>
+
+                        <table:template>
+                          <Text text="{path: 'TableScheduleModel>SatDeliveryQtyAm', formatter: '.formatter.QtyFormatting'}" />
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="11rem" id="BigBagsSatAm" filterProperty="BigBagsSatAm">
+                        <Label text="{i18n>bigbag}"/>
+
+                        <table:template>
+                            <Text text="{path: 'TableScheduleModel>BigBagsSatAm', formatter: '.formatter.QtyFormatting'}" />
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="11rem" id="SmallBagsSatAm" filterProperty="SmallBagsSatAm">
+                        <Label text="{i18n>smallbag}"/>
+
+                        <table:template>
+                          <Text text="{path: 'TableScheduleModel>SmallBagsSatAm', formatter: '.formatter.QtyFormatting'}" />
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="11rem" id="BulkSatAm" filterProperty="BulkSatAm">
+                        <Label text="{i18n>bulk}"/>
+
+                        <table:template>
+                             <Text text="{path: 'TableScheduleModel>BulkSatAm', formatter: '.formatter.QtyFormatting'}" />
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="11rem" id="SunDeliveryQtyAm" filterProperty="SunDeliveryQtyAm">
+                        <Label text="{i18n>sun}"/>
+
+                        <table:template>
+                         <Text text="{path: 'TableScheduleModel>SunDeliveryQtyAm', formatter: '.formatter.QtyFormatting'}" />
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="11rem" id="BigBagsSunAm" filterProperty="BigBagsSunAm">
+                        <Label text="{i18n>bigbag}"/>
+
+                        <table:template>
+                           <Text text="{path: 'TableScheduleModel>BigBagsSunAm', formatter: '.formatter.QtyFormatting'}" />
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="11rem" id="SmallBagsSunAm" filterProperty="SmallBagsSunAm">
+                        <Label text="{i18n>smallbag}"/>
+
+                        <table:template>
+                            <Text text="{path: 'TableScheduleModel>SmallBagsSunAm', formatter: '.formatter.QtyFormatting'}" />
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="11rem" id="BulkSunAm" filterProperty="BulkSunAm">
+                        <Label text="{i18n>bulk}"/>
+
+                        <table:template>
+                        <Text text="{path: 'TableScheduleModel>BulkSunAm', formatter: '.formatter.QtyFormatting'}" />
+                        </table:template>
+                    </table:Column>
+                     <!-- End the code
+                    GPT -40874  Adding formatter for Qty fields 
+                    WorkBench TR : DA1K926169 -->
+
+                    <table:Column width="11rem" id="WeeklyConfQtyAfterCutting" filterProperty="WeeklyConfQtyAfterCutting">
+                        <Label text="{i18n>conQty}"/>
+
+                        <table:template>
+                        
+                            <Link text="{path: 'TableScheduleModel>WeeklyConfQtyAfterCutting', formatter: '.formatter.QtyFormatting'}" press="onDigitalHub" id="confirmedQtyLink"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="21rem" id="FinalizedContract" filterProperty="FinalizedContract">
+                        <Label text="{i18n>finContract}"/>
+
+                        <table:template>
+                            <Link text="{TableScheduleModel>FinalizedContract}" press="onDigitalHub" id="contractLink" wrapping="true"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="21rem" id="SoCreated" filterProperty="SoCreated">
+                        <Label text="{i18n>soCreated}"/>
+
+                        <table:template>
+                            <Link text="{TableScheduleModel>SoCreated}" press="onDigitalHub" id="soCreatedLink" wrapping="true"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="11rem" id="BacklogOrderDetails" filterProperty="BacklogOrderDetails">
+                        <Label text="{i18n>backlogOrder}"/>
+
+                        <table:template>
+                            <Text text="{TableScheduleModel>BacklogOrderDetails}"/>
+                        </table:template>
+                    </table:Column>
+                </table:columns>
+            </table:Table>
+        </f:content>
+        <f:footer>
+            <OverflowToolbar>
+                <Button id="messagerbtn" icon="sap-icon://alert" text="{= ${message>/}.length}" visible="{= ${message>/}.length > 0}" type="Emphasized" press="onMessagePopOver"/>
+                <ToolbarSpacer/>
+                <ToolbarSpacer/>
+                <Button id="SaveButton" type="Accept" text="{i18n>save}" press="onSave" visible="false"/>
+            </OverflowToolbar>
+        </f:footer>
+    </f:DynamicPage>
+</mvc:View>
+

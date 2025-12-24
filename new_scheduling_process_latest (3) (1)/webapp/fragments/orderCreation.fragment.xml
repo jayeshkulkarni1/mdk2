@@ -1,0 +1,57 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:table="sap.ui.table"
+>
+    <Dialog
+        title="{i18n>automateOrdrCreat}"
+        contentWidth="800px"
+        contentHeight="480px"
+        titleAlignment="Center"
+    >
+        <content>
+            <table:Table
+                id="tableDialog"
+                rows="{ path: 'AutoOrderModel>/Items' }"
+                visibleRowCount="8"
+                selectionMode="None"
+            >
+                <table:columns>
+                    <table:Column id="field">
+                        <Label text="{i18n>field}" />
+
+                        <table:template>
+                            <Text text="{AutoOrderModel>ProductId}" />
+                        </table:template>
+                    </table:Column>
+                    <table:Column id="From">
+                        <Label text="{i18n>from}" />
+
+                        <table:template>
+                            <ComboBox placeholder="from" value="{AutoOrderModel>From}" items="{AutoOrderModel>Options}">
+                             <core:Item  key="{AutoOrderModel>value}"  text="{AutoOrderModel>value}" />
+                            </ComboBox>
+                        </table:template>
+                    </table:Column>
+                    <table:Column id="to">
+                        <Label text="{i18n>to}"  />
+
+                        <table:template>
+                            <ComboBox placeholder="to" value="{AutoOrderModel>To}" items="{AutoOrderModel>Options}">
+                             <core:Item  key="{AutoOrderModel>value}"  text="{AutoOrderModel>value}" />
+                            </ComboBox>
+                        </table:template>
+                    </table:Column>
+                    
+                </table:columns>
+            </table:Table>
+        </content> 
+
+          <beginButton>
+   <Button text="Save" press="createAutomateOrders" />
+  </beginButton>
+  <endButton>
+   <Button text="Cancel" press="executeCuttingLogic" />
+  </endButton>
+    </Dialog>
+</core:FragmentDefinition>

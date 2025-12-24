@@ -1,0 +1,389 @@
+<!-- Begin the code -->
+<!-- Workbench TR : DA1K909941
+      OTC_I658 New View O9 Data on click of View O9 Data button  added as part of new changes  -->
+    <mvc:View height="100%" xmlns:mvc="sap.ui.core.mvc" controllerName="schedulingprocess.schedulingprocess.controller.ViewO9Data" xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:f="sap.f" xmlns:fb="sap.ui.comp.filterbar" xmlns:table="sap.ui.table" xmlns:svm="sap.ui.comp.smartvariants"> <f:DynamicPage headerExpanded="{/headerExpanded}" showFooter="true">
+        <f:title>
+            <f:DynamicPageTitle>
+                <f:heading>
+                    <Title text="{i18n>viewO9Data}"/>
+                </f:heading>
+            </f:DynamicPageTitle>
+        </f:title>
+        <f:header>
+            <f:DynamicPageHeader>
+                <f:content>
+                    <fb:FilterBar id="viewfilterbar" persistencyKey="mysPersKey" useToolbar="false" search=".onSearch" filterChange=".onFilterChange" afterVariantLoad=".onAfterVariantLoad">
+                        <fb:filterGroupItems>
+                            <fb:FilterGroupItem name="Week" label="{i18n>week}" groupName="Group1" visibleInFilterBar="true">
+                                <fb:control>
+                                    <MultiInput id="weekInput" showSuggestion="false" width="100%" showValueHelp="true" valueHelpOnly="false" required="true" valueHelpRequest="handleWeekF4"/>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+                            <fb:FilterGroupItem name="Layout" label="{i18n>layout}" groupName="Group1" visibleInFilterBar="true">
+                                <fb:control>
+                                    <MultiComboBox name="Layout" id="layout" showSelectAll="true" items="{path: 'LocalModel>/Columns'}">
+                                        <core:Item key="{LocalModel>ID}" text="{LocalModel>Text}"/>
+                                    </MultiComboBox>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+                        </fb:filterGroupItems>
+                    </fb:FilterBar>
+                </f:content>
+            </f:DynamicPageHeader>
+        </f:header>
+        <f:content>
+            <table:Table id="table" rows="{ViewO9DataTableModel>/results}" filter="onFilterScheduleTable" selectionMode="None" visible="false">
+                <table:extension>
+                    <OverflowToolbar>
+                        <Title text="Items({= ${ViewO9DataTableModel>/results}.length})" level="H2"/>
+                        <ToolbarSpacer/>
+                        <Input width="12rem" placeholder="{i18n>fixedcolumncount}" tooltip="{i18n>fixedcolumncount}" liveChange="onColumnFreeze"/>
+                        <Button icon="sap-icon://excel-attachment" press="onExport"/>
+                    </OverflowToolbar>
+                </table:extension>
+                <table:columns>
+                    <table:Column width="11rem" id="Week" filterProperty="Week">
+                        <Label text="{i18n>week}"/>
+                        <table:template>
+                            <Text text="{ViewO9DataTableModel>Week}"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="11rem" id="ContractNumber" filterProperty="ContractNumber">
+                        <Label text="{i18n>salesandDistributionDocNum}"/>
+                        <table:template>
+                            <Text text="{ViewO9DataTableModel>ContractNumber}"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="11rem" id="Item" filterProperty="Item">
+                        <Label text="{i18n>itemNumberofsdDoc}"/>
+                        <table:template>
+                            <Text text="{ViewO9DataTableModel>Item}"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="11rem" id="ManagerId" filterProperty="ManagerId">
+                        <Label text="{i18n>managerId}"/>
+                        <table:template>
+                            <Text text="{ViewO9DataTableModel>ManagerId}"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="11rem" id="BusinessScenario" filterProperty="BusinessScenario">
+                        <Label text="{i18n>businessScenario}"/>
+                        <table:template>
+                               <Text text="{path: 'ViewO9DataTableModel>BusinessScenario', formatter: '.formatter.businessText'}"/>
+                        </table:template>
+                    </table:Column>
+                       <!-- Begin the code 
+                    Work Bench TR : DA1K912060
+                    New changes to add table column for Business Process -->
+                        <table:Column width="11rem" id="BusProcess" filterProperty="BusProcess">
+                        <Label text="{i18n>busProcess}"/>
+                        <table:template>
+                            <Text text="{ViewO9DataTableModel>BusProcess}"/>
+                        </table:template>
+                    </table:Column>
+                    <!-- End the code -->
+                    <table:Column width="11rem" id="BlockFlag" filterProperty="BlockFlag">
+                        <Label text="{i18n>contractBlockFlag}"/>
+                        <table:template>
+                            <Text text="{ViewO9DataTableModel>BlockFlag}"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="11rem" id="Rank" filterProperty="Rank">
+                        <Label text="{i18n>rank}"/>
+                        <table:template>
+                            <Text text="{ViewO9DataTableModel>Rank}"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="11rem" id="Plant" filterProperty="Plant">
+                        <Label text="{i18n>plant}"/>
+                        <table:template>
+                            <Text text="{ViewO9DataTableModel>Plant}"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="11rem" id="NetworkPlant" filterProperty="NetworkPlant">
+                        <Label text="{i18n>NetworkPlant}"/>
+                        <table:template>
+                            <Text text="{ViewO9DataTableModel>NetworkPlant}"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="11rem" id="SoldToId" filterProperty="SoldToId">
+                        <Label text="{i18n>soldToPartyID}"/>
+                        <table:template>
+                            <Text text="{ViewO9DataTableModel>SoldToId}"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="11rem" id="ShiptoId" filterProperty="ShiptoId">
+                        <Label text="{i18n>shiptoPartyID}"/>
+                        <table:template>
+                            <Text text="{ViewO9DataTableModel>ShiptoId}"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="11rem" id="SoldToName" filterProperty="SoldToName">
+                        <Label text="{i18n>soldToPrtyName}"/>
+                        <table:template>
+                            <Text text="{ViewO9DataTableModel>SoldToName}"/>
+                        </table:template>
+                    </table:Column>
+
+                    <table:Column width="11rem" id="ShipToName" filterProperty="ShipToName">
+                        <Label text="{i18n>shipToPrtyName}"/>
+                        <table:template>
+                            <Text text="{ViewO9DataTableModel>ShipToName}"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="11rem" id="Material" filterProperty="Material">
+                        <Label text="{i18n>matnr}"/>
+                        <table:template>
+                            <Text text="{ViewO9DataTableModel>Material}"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="11rem" id="FormulaKey" filterProperty="FormulaKey">
+                        <Label text="{i18n>formulaKey}"/>
+                        <table:template>
+                            <Text text="{ViewO9DataTableModel>FormulaKey}"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="11rem" id="Incoterms" filterProperty="Incoterms">
+                        <Label text="{i18n>incoterms}"/>
+                        <table:template>
+                            <Text text="{ViewO9DataTableModel>Incoterms}"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="11rem" id="AccMngName" filterProperty="AccMngName">
+                        <Label text="{i18n>accountMngName}"/>
+                        <table:template>
+                            <Text text="{ViewO9DataTableModel>AccMngName}"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="11rem" id="MaterialDesc" filterProperty="MaterialDesc">
+                        <Label text="{i18n>matnrDesc}"/>
+                        <table:template>
+                            <Text text="{ViewO9DataTableModel>MaterialDesc}"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="11rem" id="FormulaKeyDesc" filterProperty="FormulaKeyDesc">
+                        <Label text="{i18n>formulaDesc}"/>
+                        <table:template>
+                            <Text text="{ViewO9DataTableModel>FormulaKeyDesc}"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="11rem" id="ValidFrom" filterProperty="ValidFrom">
+                        <Label text="{i18n>validfrom}"/>
+                        <table:template>
+                            <Text text="{ViewO9DataTableModel>ValidFrom}"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="11rem" id="ValidTo" filterProperty="ValidTo">
+                        <Label text="{i18n>validto}"/>
+                        <table:template>
+                            <Text text="{ViewO9DataTableModel>ValidTo}"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="11rem" id="OrdQty" filterProperty="OrdQty">
+                        <Label text="{i18n>openQty}"/>
+                        <table:template>
+                           
+                             <Text text="{path: 'ViewO9DataTableModel>OrdQty', formatter: '.formatter.QtyFormatting'}" />
+                            
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="11rem" id="CustomerReqQty" filterProperty="CustomerReqQty">
+                        <Label text="{i18n>customerReqQty}"/>
+                        <table:template>
+                   
+                              <Text text="{path: 'ViewO9DataTableModel>CustomerReqQty', formatter: '.formatter.QtyFormatting'}" />
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="11rem" id="Uom" filterProperty="Uom">
+                        <Label text="{i18n>uom}"/>
+                        <table:template>
+                            <Text text="{ViewO9DataTableModel>Uom}"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="11rem" id="AmConfQty" filterProperty="AmConfQty">
+                        <Label text="{i18n>AmConfQty}"/>
+                        <table:template>
+                           
+                            <Text text="{path: 'ViewO9DataTableModel>AmConfQty', formatter: '.formatter.QtyFormatting'}" />
+                        </table:template>
+                    </table:Column>
+
+                    <table:Column width="11rem" id="MosSchdQty" filterProperty="MosSchdQty">
+                        <Label text="{i18n>MosSchdQty}"/>
+                        <table:template>
+                           
+                            <Text text="{path: 'ViewO9DataTableModel>MosSchdQty', formatter: '.formatter.QtyFormatting'}" />
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="11rem" id="ConsumeQty" filterProperty="ConsumQty">
+                        <Label text="{i18n>ConsumeQty}"/>
+                        <table:template>
+                        
+                            <Text text="{path: 'ViewO9DataTableModel>ConsumQty', formatter: '.formatter.QtyFormatting'}" />
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="11rem" id="BacklogQty" filterProperty="BacklogQty">
+                        <Label text="{i18n>BacklogQty}"/>
+                        <table:template>
+                            
+                            <Text text="{path: 'ViewO9DataTableModel>BacklogQty', formatter: '.formatter.QtyFormatting'}" />
+                        </table:template>
+                    </table:Column>
+                    
+                     <!-- Begin the code Defect - GPT - 28372
+                    Work Bench TR : DA1K916990 
+                    New changes to add table columns -->
+                    <table:Column width="11rem" id="MON_QTY" filterProperty="MON_QTY">
+                        <Label text="{i18n>mon}"/>
+                        <table:template>
+                          <Text text="{path: 'ViewO9DataTableModel>MON_QTY', formatter: '.formatter.QtyFormatting'}" />
+                        </table:template>
+                    </table:Column>
+                     <table:Column width="11rem" id="MON_PACK" filterProperty="MON_PACK">
+                        <Label text="{i18n>monPack}"/>
+                        <table:template>
+                            <Text text="{ViewO9DataTableModel>MON_PACK}"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="11rem" id="TUE_QTY" filterProperty="TUE_QTY">
+                        <Label text="{i18n>tue}"/>
+                        <table:template>
+                           <Text text="{path: 'ViewO9DataTableModel>TUE_QTY', formatter: '.formatter.QtyFormatting'}" />
+                        </table:template>
+                    </table:Column>
+                     <table:Column width="11rem" id="TUE_PACK" filterProperty="TUE_PACK">
+                        <Label text="{i18n>tuePack}"/>
+                        <table:template>
+                            <Text text="{ViewO9DataTableModel>TUE_PACK}"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="11rem" id="WED_QTY" filterProperty="WED_QTY">
+                        <Label text="{i18n>wed}"/>
+                        <table:template>
+                             <Text text="{path: 'ViewO9DataTableModel>WED_QTY', formatter: '.formatter.QtyFormatting'}" />
+                        </table:template>
+                    </table:Column>
+                     <table:Column width="11rem" id="WED_PACK" filterProperty="WED_PACK">
+                        <Label text="{i18n>wedPack}"/>
+                        <table:template>
+                            <Text text="{ViewO9DataTableModel>WED_PACK}"/>
+                        </table:template>
+                    </table:Column>
+                     <table:Column width="11rem" id="THU_QTY" filterProperty="THU_QTY">
+                        <Label text="{i18n>thu}"/>
+                        <table:template>
+                           <Text text="{path: 'ViewO9DataTableModel>THU_QTY', formatter: '.formatter.QtyFormatting'}" />
+                        </table:template>
+                    </table:Column>
+                     <table:Column width="11rem" id="THU_PACK" filterProperty="THU_PACK">
+                        <Label text="{i18n>thuPack}"/>
+                        <table:template>
+                            <Text text="{ViewO9DataTableModel>THU_PACK}"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="11rem" id="FRI_QTY" filterProperty="FRI_QTY">
+                        <Label text="{i18n>fri}"/>
+                        <table:template>
+                           <Text text="{path: 'ViewO9DataTableModel>FRI_QTY', formatter: '.formatter.QtyFormatting'}" />
+                        </table:template>
+                    </table:Column>
+                     <table:Column width="11rem" id="FRI_PACK" filterProperty="FRI_PACK">
+                        <Label text="{i18n>friPack}"/>
+                        <table:template>
+                            <Text text="{ViewO9DataTableModel>FRI_PACK}"/>
+                        </table:template>
+                    </table:Column>
+                      <table:Column width="11rem" id="SAT_QTY" filterProperty="SAT_QTY">
+                        <Label text="{i18n>sat}"/>
+                        <table:template>
+                         <Text text="{path: 'ViewO9DataTableModel>SAT_QTY', formatter: '.formatter.QtyFormatting'}" />
+                        </table:template>
+                    </table:Column>
+                     <table:Column width="11rem" id="SAT_PACK" filterProperty="SAT_PACK">
+                        <Label text="{i18n>satPack}"/>
+                        <table:template>
+                            <Text text="{ViewO9DataTableModel>SAT_PACK}"/>
+                        </table:template>
+                    </table:Column>
+                     <table:Column width="11rem" id="SUN_QTY" filterProperty="SUN_QTY">
+                        <Label text="{i18n>sun}"/>
+                        <table:template>
+                           <Text text="{path: 'ViewO9DataTableModel>SUN_QTY', formatter: '.formatter.QtyFormatting'}" />
+                        </table:template>
+                    </table:Column>
+                     <table:Column width="11rem" id="SUN_PACK" filterProperty="SUN_PACK">
+                        <Label text="{i18n>sunPack}"/>
+                        <table:template>
+                            <Text text="{ViewO9DataTableModel>SUN_PACK}"/>
+                        </table:template>
+                    </table:Column>
+                     <table:Column width="11rem" id="LAST_DEL_PT" filterProperty="LAST_DEL_PT">
+                        <Label text="{i18n>lastDelPoint}"/>
+                        <table:template>
+                            <Text text="{ViewO9DataTableModel>LAST_DEL_PT}"/>
+                        </table:template>
+                    </table:Column>
+                    
+                    <table:Column width="11rem" id="ConfirmQtyO9" filterProperty="ConfirmQtyO9">
+                        <Label text="{i18n>O9ConfirmQty}"/>
+                        <table:template>
+                             <Text text="{path: 'ViewO9DataTableModel>ConfirmQtyO9', formatter: '.formatter.QtyFormatting'}" />
+                        </table:template>
+                    </table:Column>
+                     <table:Column width="11rem" id="O9_MON" filterProperty="O9_MON">
+                        <Label text="{i18n>o9Mon}"/>
+                        <table:template>
+                           <Text text="{path: 'ViewO9DataTableModel>O9_MON', formatter: '.formatter.QtyFormatting'}" />
+                        </table:template>
+                    </table:Column>
+                     <table:Column width="11rem" id="O9_TUE" filterProperty="O9_TUE">
+                        <Label text="{i18n>o9Tue}"/>
+                        <table:template>
+                            <Text text="{path: 'ViewO9DataTableModel>O9_TUE', formatter: '.formatter.QtyFormatting'}" />
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="11rem" id="O9_WED" filterProperty="O9_WED">
+                        <Label text="{i18n>o9Wed}"/>
+                        <table:template>
+                             <Text text="{path: 'ViewO9DataTableModel>O9_WED', formatter: '.formatter.QtyFormatting'}" />
+                        </table:template>
+                    </table:Column>
+                     <table:Column width="11rem" id="O9_THU" filterProperty="O9_THU">
+                        <Label text="{i18n>o9Thu}"/>
+                        <table:template>
+                           <Text text="{path: 'ViewO9DataTableModel>O9_THU', formatter: '.formatter.QtyFormatting'}" />
+                        </table:template>
+                    </table:Column>
+                       <table:Column width="11rem" id="O9_FRI" filterProperty="O9_FRI">
+                        <Label text="{i18n>o9Fri}"/>
+                        <table:template>
+                           <Text text="{path: 'ViewO9DataTableModel>O9_FRI', formatter: '.formatter.QtyFormatting'}" />
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="11rem" id="O9_SAT" filterProperty="O9_SAT">
+                        <Label text="{i18n>o9Sat}"/>
+                        <table:template>
+                            <Text text="{path: 'ViewO9DataTableModel>O9_SAT', formatter: '.formatter.QtyFormatting'}" />
+                        </table:template>
+                    </table:Column>
+                     <table:Column width="11rem" id="O9_SUN" filterProperty="O9_SUN">
+                        <Label text="{i18n>o9Sun}"/>
+                        <table:template>
+                             <Text text="{path: 'ViewO9DataTableModel>O9_SUN', formatter: '.formatter.QtyFormatting'}" />
+                        </table:template>
+                    </table:Column>
+                     <!-- End the code Defect - GPT - 28372
+                    Work Bench TR : DA1K916990 
+                    New changes to add table columns -->
+                </table:columns>
+            </table:Table>
+        </f:content>
+        <f:footer>
+            <OverflowToolbar>
+                <ToolbarSpacer></ToolbarSpacer>
+                <Button id="SimulateButton" type="Emphasized" visible="false" text="{i18n>simulate}" press="onSimulate"/>
+            </OverflowToolbar>
+        </f:footer>
+    </f:DynamicPage>
+</mvc:View>
+<!-- End the code -->

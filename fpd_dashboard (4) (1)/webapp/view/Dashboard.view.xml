@@ -1,0 +1,990 @@
+<mvc:View
+    controllerName="fdpdashboard.controller.Dashboard"
+    height="100%"
+    xmlns:mvc="sap.ui.core.mvc" 	xmlns:ui="sap.ui.table"
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:fb="sap.ui.comp.filterbar"
+    xmlns:sap.ui.fl="sap.ui.fl"
+    xmlns:svm="sap.ui.comp.smartvariants"
+>
+    <f:DynamicPage headerExpanded="{/headerExpanded}">
+        <f:title>
+            <f:DynamicPageTitle>
+                <f:heading>
+                    <!-- <Title text="{i18n>appTitle}" /> -->
+                </f:heading>
+                <f:expandedContent>
+                    <svm:SmartVariantManagement
+                        id="svm"
+                        class="sapUiSmallMarginBegin"
+                        showExecuteOnSelection="true"
+                    />
+                </f:expandedContent>
+            </f:DynamicPageTitle>
+        </f:title>
+        <f:header>
+            <f:DynamicPageHeader>
+                <f:content>
+                    <fb:FilterBar
+                        id="mainPagefilterbar"
+                        persistencyKey="myPersKey"
+                        useToolbar="false"
+                        search=".onSearch"
+                        filterChange=".onFilterChange"
+                        afterVariantLoad=".onAfterVariantLoad"
+                    >
+                        <fb:filterGroupItems>
+                            <fb:FilterGroupItem
+                                name="Sales Org"
+                                label="{i18n>salesOrg}"
+                                groupName="Group1"
+                                visibleInFilterBar="true" 
+                            >
+                                <fb:control>
+                                    <MultiInput
+                                        id="salesOrgInput"
+                                        value="{FiltersModel>/SalesOrg}"
+                                        name="{i18n>salesOrg}"
+                                        change="onSelectionChange"
+                                        valueHelpRequest=".handleSalesOrgF4" valueHelpOnly="true"
+                                    >
+                                        <core:Item
+                                            key="{key}"
+                                            text="{name}"
+                                        />
+                                    </MultiInput>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+                            <fb:FilterGroupItem
+                                name="Order Type"
+                                label="{i18n>orderType}"
+                                groupName="Group1"
+                                visibleInFilterBar="true"
+                            >
+                                <fb:control>
+                                    <MultiInput
+                                        id="orderTypeInput"
+                                        value="{FiltersModel>/OrderType}"
+                                        name="Order Type"
+                                        valueHelpRequest=".handleOrderTypeF4"  valueHelpOnly="true"
+                                        selectionChange=".onSelectionChange"
+                                    >
+                                        <core:Item
+                                            key="{key}"
+                                            text="{name}"
+                                        />
+                                    </MultiInput>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+                            <fb:FilterGroupItem
+                                name="Order Creation Date"
+                                label="{i18n>orderCreatDate}"
+                                groupName="Group1"
+                                visibleInFilterBar="true"
+                            >
+                                <fb:control>
+                                    <DateRangeSelection
+                                        required="true"
+                                        dateValue="{FiltersModel>/OrderCreateDateFrom}"
+                                        secondDateValue="{FiltersModel>/OrderCreateDateTo}"
+                                        id="orderCreationDate"
+                                        displayFormat="dd.MM.yyyy"
+                                        change="handleChange"
+                                    />
+                                </fb:control>
+                            </fb:FilterGroupItem>
+                            <fb:FilterGroupItem
+                                name="Division"
+                                label="{i18n>division}"
+                                groupName="Group1"
+                                visibleInFilterBar="true"
+                            >
+                                <fb:control>
+                                    <MultiInput
+                                        id="divisionInput"
+                                        value="{FiltersModel>/Division}"
+                                        name="Division"
+                                        valueHelpRequest=".handleDivisionF4"  valueHelpOnly="true"
+                                    >
+                                        <core:Item
+                                            key="{key}"
+                                            text="{name}"
+                                        />
+                                    </MultiInput>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+                              <fb:FilterGroupItem
+                                name="Sales Office"
+                                label="{i18n>salesOffice}"
+                                groupName="Group1"
+                                visibleInFilterBar="true"
+                            >
+                                <fb:control>
+                                    <MultiInput
+                                        id="salesOfficeInput"
+                                        value="{FiltersModel>/SalesOffice}"
+                                        name="Sales Office"
+                                        valueHelpRequest=".handleSalesOfficeF4"  valueHelpOnly="true"
+                                    >
+                                        <core:Item
+                                            key="{key}"
+                                            text="{name}"
+                                        />
+                                    </MultiInput>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+                            <fb:FilterGroupItem
+                                name="Sales Group"
+                                label="{i18n>salesGroup}"
+                                groupName="Group1"
+                                visibleInFilterBar="true"
+                            >
+                                <fb:control>
+                                    <MultiInput
+                                        id="salesGroupInput"
+                                        value="{FiltersModel>/SalesGroup}"
+                                        name="Sales Office"
+                                        valueHelpRequest=".handleSalesGroupF4"  valueHelpOnly="true"
+                                    >
+                                        <core:Item
+                                            key="{key}"
+                                            text="{name}"
+                                        />
+                                    </MultiInput>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+                            <fb:FilterGroupItem
+                                name="Sold-To"
+                                label="{i18n>soldTo}"
+                                groupName="Group1"
+                                visibleInFilterBar="true"
+                            >
+                                <fb:control>
+                                    <MultiInput
+                                        id="soldToInput"
+                                        value="{FiltersModel>/SoldTo}"
+                                        name="Sold To"
+                                        valueHelpRequest=".handleSoldToF4"  valueHelpOnly="true"
+                                    >
+                                        <core:Item
+                                            key="{key}"
+                                            text="{name}"
+                                        />
+                                    </MultiInput>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+                            <fb:FilterGroupItem
+                                name="Ship-To"
+                                label="{i18n>shipTo}"
+                                groupName="Group1"
+                                visibleInFilterBar="true"
+                            >
+                                <fb:control>
+                                    <MultiInput
+                                        id="shipToInput"
+                                        value="{FiltersModel>/ShipTo}"
+                                        valueHelpRequest=".handleShipToF4"  valueHelpOnly="true"
+                                    />
+                                </fb:control>
+                            </fb:FilterGroupItem>
+                            <fb:FilterGroupItem
+                                name="Sales Order"
+                                label="{i18n>salesOrder}"
+                                groupName="Group1"
+                                visibleInFilterBar="true"
+                            >
+                                <fb:control>
+                                    <MultiInput
+                                        id="salesOrderInput"
+                                        value="{FiltersModel>/SalesOrderFrom}"
+                                        valueHelpRequest=".handleSalesOrderF4"
+                                        showValueHelp="true"  valueHelpOnly="true"
+                                        selectionChange=".onSelectionChange"
+                                    />
+                                </fb:control>
+                            </fb:FilterGroupItem>
+                            <fb:FilterGroupItem
+                                name="Contract"
+                                label="{i18n>contract}"
+                                groupName="Group1"
+                                visibleInFilterBar="true"
+                            >
+                                <fb:control>
+                                    <MultiInput
+                                        id="contractInput"
+                                        value="{FiltersModel>/Contract}"
+                                        valueHelpRequest=".handleContractF4"
+                                        showValueHelp="true"  valueHelpOnly="true"
+                                        selectionChange=".onSelectionChange"
+                                    />
+                                </fb:control>
+                            </fb:FilterGroupItem>
+                            <fb:FilterGroupItem
+                                name="Customer PO #"
+                                label="{i18n>customerPo}"
+                                groupName="Group1"
+                                visibleInFilterBar="true"
+                            >
+                                <fb:control>
+                                    <MultiInput
+                                        value="{FiltersModel>/CustomerPo}"
+                                        id="customerPOInput"
+                                        valueHelpRequest=".handleCustomerPOF4"
+                                        showValueHelp="true"  valueHelpOnly="true"
+                                        selectionChange=".onSelectionChange"
+                                    />
+                                </fb:control>
+                            </fb:FilterGroupItem>
+                            <fb:FilterGroupItem
+                                name="Plant"
+                                label="{i18n>plant}"
+                                groupName="Group1"
+                                visibleInFilterBar="true"
+                            >
+                                <fb:control>
+                                    <MultiInput
+                                        value="{FiltersModel>/Plant}"
+                                        id="plantInput"
+                                        name="Plant"
+                                        valueHelpRequest=".handlePlantF4"
+                                        showValueHelp="true"  valueHelpOnly="true"
+                                        selectionChange=".onSelectionChange"
+                                    >
+                                        <core:Item
+                                            key="{key}"
+                                            text="{name}"
+                                        />
+                                    </MultiInput>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+                            <fb:FilterGroupItem
+                                name="Business Scenerio"
+                                label="{i18n>busScenerio}"
+                                groupName="Group1"
+                                visibleInFilterBar="true"
+                            >
+                                <fb:control>
+                                    <ComboBox id="busScenerioBox" value="{FiltersModel>/BusScenerio}"
+                                      
+                                        items="{BSDataModel>/results}"
+                                    >
+                                        <core:Item
+                                            key="{BSDataModel>Low}"
+                                            text="{BSDataModel>High}"
+                                        />
+                                    </ComboBox>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+                            
+                            <fb:FilterGroupItem
+                                name="Ex-Space Indicator"
+                                label="{i18n>exSpaceIndicator}"
+                                groupName="Group1"
+                                visibleInFilterBar="true"
+                            >
+                                <fb:control>
+                                    <ComboBox id="exSpaceCombo" value="{FiltersModel>/ExSpaceIndictor}"
+                                      
+                                        items="{LocalModel>/exSpace}"
+                                    >
+                                        <core:Item
+                                            key="{LocalModel>text}"
+                                            text="{LocalModel>text}"
+                                        />
+                                    </ComboBox>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+                            <fb:FilterGroupItem
+                                name="Call By Date"
+                                label="{i18n>callByDate}"
+                                groupName="Group1"
+                                visibleInFilterBar="true"
+                            >
+                                <fb:control>
+                                    <DateRangeSelection
+                                        dateValue="{FiltersModel>/CallByDateFrom}"
+                                        secondDateValue="{FiltersModel>/CallByDateTo}"
+                                        displayFormat="dd.MM.yyyy"
+                                    />
+                                </fb:control>
+                            </fb:FilterGroupItem>
+                            <fb:FilterGroupItem
+                                name="Priced Date"
+                                label="{i18n>pricedDate}"
+                                groupName="Group1"
+                                visibleInFilterBar="true"
+                            >
+                                <fb:control>
+                                    <DateRangeSelection
+                                        dateValue="{FiltersModel>/PricedDateFrom}"
+                                        secondDateValue="{FiltersModel>/PricedDateTo}"
+                                        displayFormat="dd.MM.yyyy"
+                                    />
+                                </fb:control>
+                            </fb:FilterGroupItem>
+                            <fb:FilterGroupItem name="Layout" label="{i18n>layout}" groupName="Group1" visibleInFilterBar="true">
+									<fb:control>
+										<MultiComboBox  
+											name="Layout" id="layout" showValueHelp="true" showSelectAll="true"
+											 items="{	path: 'LocalModel>/Columns'}" >
+											<core:Item key="{LocalModel>ID}" text="{LocalModel>Text}" />
+										</MultiComboBox>
+									</fb:control>
+								</fb:FilterGroupItem>
+                        </fb:filterGroupItems>
+                    </fb:FilterBar>
+                </f:content>
+            </f:DynamicPageHeader>
+        </f:header>
+        <f:content>
+        	<ui:Table
+				id="table" visible="false" type="Active"
+				selectionMode="MultiToggle" showColumnVisibilityMenu="true"
+				 rows="{
+						path: 'TableDataModel>/results'
+					}"
+				visibleRowCount="12"
+				enableCellFilter="{ui>/cellFilterOn}"
+				filter="filterPrice"
+				ariaLabelledBy="title" rowActionCount="1" rowSelectionChange="onDetailPress">
+				<ui:extension>
+					<OverflowToolbar style="Clear">
+					  <Title
+                            text="Items({= ${TableDataModel>/results}.length})"
+                            level="H2"
+                        />
+                        <ToolbarSpacer />
+                        <Button
+                            tooltip="Execute"
+                            text="{i18n>execute}" press="onExecuteAllSteps"
+                        />
+                        <!-- Jayesh commented button for GPT 23294 JIRA DEFECT on 5 Jan 2024 -->
+                        <!-- <Button
+                            tooltip="Move"
+                            text="{i18n>moveStocks}" press="onMovetoStocks"
+                        /> -->
+                         <!-- Jayesh commented button for GPT 23294 JIRA DEFECT on 5 Jan 2024 -->
+                        <Button
+                            tooltip="STO"
+                            text="{i18n>createSto}" press="onCreateSTO"
+                        />
+                        <Button
+                            tooltip="STO Delivery" press="onStoDelivery"
+                            text="{i18n>createStoDel}"
+                        />
+                        <Button
+                            tooltip="Update Ex-Space Indicator"
+                            text="{i18n>updateExSpacIndic}"
+                            press="updateExSpaceIndicator"
+                        />
+                        <Button
+                            tooltip="Update Call-By Date"
+                            text="{i18n>updateCalByDate}"
+                            press="openUpdateCallByDateDialog"
+                        />
+                        <!-- Jayesh disabled buttons for GPT 27503 JIRA DEFECT on 5 Jan 2024 -->
+                            <Button
+                            tooltip="Call for Price"
+                            text="{i18n>uCallForPrice}"
+                            press="openUpdateCallByPriceDialog" enabled="false"
+                        /> 
+                        <Button
+                            tooltip="Update Final Price (China)"
+                            text="{i18n>updateFinalPricChina}"  press="openUpdateCallForPriceChinaDialog" enabled="false"
+                        />
+                         <!-- Jayesh disabled buttons  for GPT 27503 JIRA DEFECT on 5 Jan 2024 -->
+
+                        <!-- <Button
+                            icon="sap-icon://action-settings"
+                            press="onPersoButtonPressed"
+                        /> -->
+                        <Button
+                            icon="sap-icon://excel-attachment"
+                            press="onExport"
+                        />
+					</OverflowToolbar>
+				</ui:extension>
+				<ui:columns>
+					<ui:Column
+						width="11rem" 
+						filterProperty="SalesOrder" id="SalesOrder">
+						<Label text="{i18n>salesOrder}" />
+						<ui:template>
+							<Text text="{TableDataModel>SalesOrder}" wrapping="false" />
+						</ui:template>
+					</ui:Column>
+
+                    <ui:Column
+						width="11rem"
+						filterProperty="SalesOrderItem" id="SalesOrderItem">
+						<Label text="{i18n>salesOrderItem}" />
+						<ui:template>
+							<Text text="{TableDataModel>SalesOrderItem}" wrapping="false" />
+						</ui:template>
+					</ui:Column>
+
+                    <ui:Column
+						width="11rem"
+						 filterProperty="SalesOrg" id="SalesOrg">
+						<Label text="{i18n>salesOrg}" />
+						<ui:template>
+							<Text text="{TableDataModel>SalesOrg}" wrapping="false" />
+						</ui:template>
+					</ui:Column>
+                     <ui:Column
+						width="11rem"
+						 filterProperty="SalesOrgName" id="SalesOrgName">
+						<Label text="{i18n>salesOrgName}" />
+						<ui:template>
+							<Text text="{TableDataModel>SalesOrgName}" wrapping="false" />
+						</ui:template>
+					</ui:Column>
+
+                    <ui:Column
+						width="11rem"
+						filterProperty="Division" id="Division">
+						<Label text="{i18n>division}" />
+						<ui:template>
+							<Text text="{TableDataModel>Division}" wrapping="false" />
+						</ui:template>
+					</ui:Column>
+                    <ui:Column
+						width="11rem"
+						filterProperty="DivisionName" id="DivisionName">
+						<Label text="{i18n>divisionName}" />
+						<ui:template>
+							<Text text="{TableDataModel>DivisionName}" wrapping="false" />
+						</ui:template>
+					</ui:Column>
+                    <ui:Column
+						width="11rem"
+						filterProperty="DistributionChannel" id="DistributionChannel">
+						<Label text="{i18n>distributionChannel}" />
+						<ui:template>
+							<Text text="{TableDataModel>DistributionChannel}" wrapping="false" />
+						</ui:template>
+					</ui:Column>
+                     <ui:Column
+						width="15rem"
+						filterProperty="DistributionChannelName" id="DistributionChannelName">
+						<Label text="{i18n>distributionChannelName}" />
+						<ui:template>
+							<Text text="{TableDataModel>DistributionChannelName}" wrapping="false" />
+						</ui:template>
+					</ui:Column>
+
+                     <ui:Column
+						width="11rem"
+						filterProperty="OrderType" id="OrderType">
+						<Label text="{i18n>orderType}" />
+						<ui:template>
+							<Text text="{TableDataModel>OrderType}" wrapping="false" />
+						</ui:template>
+					</ui:Column>
+
+                      <ui:Column
+						width="11rem"
+						filterProperty="OrderCreateDate" id="OrderCreateDate">
+						<Label text="{i18n>orderCreatDate}" />
+						<ui:template>
+							<Text text="{path: 'TableDataModel>OrderCreateDate', formatter:'.formatter.formatDate'}" wrapping="false" />
+						</ui:template>
+					</ui:Column>
+                     <ui:Column
+						width="11rem"
+						filterProperty="SoldTo" id="SoldTo">
+						<Label text="{i18n>soldTo}" />
+						<ui:template>
+							<Text text="{TableDataModel>SoldTo}" wrapping="false" />
+						</ui:template>
+					</ui:Column>
+                     <ui:Column
+						width="11rem"
+						filterProperty="SoldToName" id="SoldToName">
+						<Label text="{i18n>soldToName}" />
+						<ui:template>
+							<Text text="{TableDataModel>SoldToName}" wrapping="false" />
+						</ui:template>
+					</ui:Column>
+                     <ui:Column
+						width="11rem"
+						filterProperty="ShipTo" id="ShipTo">
+						<Label text="{i18n>shipTo}" />
+						<ui:template>
+							<Text text="{TableDataModel>ShipTo}" wrapping="false" />
+						</ui:template>
+					</ui:Column>
+                     <ui:Column
+						width="11rem"
+						filterProperty="ShipToName" id="ShipToName">
+						<Label text="{i18n>shipToName}" />
+						<ui:template>
+							<Text text="{TableDataModel>ShipToName}" wrapping="false" />
+						</ui:template>
+					</ui:Column>
+                     <ui:Column
+						width="11rem"
+						filterProperty="ShipToCity" id="ShipToCity">
+						<Label text="{i18n>shipToCity}" />
+						<ui:template>
+							<Text text="{TableDataModel>ShipToCity}" wrapping="false" />
+						</ui:template>
+					</ui:Column>
+                     <ui:Column
+						width="11rem"
+						filterProperty="ShipToRegion" id="ShipToRegion">
+						<Label text="{i18n>shipToRegion}" />
+						<ui:template>
+							<Text text="{TableDataModel>ShipToRegion}" wrapping="false" />
+						</ui:template>
+					</ui:Column>
+
+                     <ui:Column
+						width="11rem"
+						filterProperty="SalesOrderQty" id="SalesOrderQty">
+						<Label text="{i18n>orderQty}" />
+						<ui:template>
+							<Text text="{TableDataModel>SalesOrderQty}" wrapping="false" />
+						</ui:template>
+					</ui:Column>
+                     <ui:Column
+						width="11rem"
+						filterProperty="Unit" id="Unit">
+						<Label text="{i18n>unit}" />
+						<ui:template>
+							<Text text="{TableDataModel>Unit}" wrapping="false" />
+						</ui:template>
+					</ui:Column>
+                     <ui:Column
+						width="11rem"
+						filterProperty="BusinessScenario" id="BusinessScenario">
+						<Label text="{i18n>busScenerio}" />
+						<ui:template>
+							<Text text="{TableDataModel>BusinessScenario}" wrapping="false" />
+						</ui:template>
+					</ui:Column>
+                    
+                     <ui:Column
+						width="11rem"
+						filterProperty="Material" id="Material">
+						<Label text="{i18n>matnr}" />
+						<ui:template>
+							<Text text="{TableDataModel>Material}" wrapping="false" />
+						</ui:template>
+					</ui:Column>
+                    <ui:Column
+						width="15rem" visible="false"
+						filterProperty="MaterialDesc" id="MaterialDesc">
+						<Label text="{i18n>materialDesc}" />
+						<ui:template>
+							<Text text="{TableDataModel>MaterialDesc}" wrapping="false" />
+						</ui:template>
+					</ui:Column>
+                     <ui:Column
+						width="15rem" visible="false"
+						filterProperty="Currency" id="Currency">
+						<Label text="{i18n>currency}" />
+						<ui:template>
+							<Text text="{TableDataModel>Currency}" wrapping="false" />
+						</ui:template>
+					</ui:Column>
+                   
+                      <ui:Column
+						width="11rem"
+						filterProperty="DelvPlant" id="DelvPlant">
+						<Label text="{i18n>plant}" />
+						<ui:template>
+							<Text text="{TableDataModel>DelvPlant}" wrapping="false" />
+						</ui:template>
+					</ui:Column>
+                      <ui:Column
+						width="11rem"
+						filterProperty="CustomerPo" id="CustomerPo">
+						<Label text="{i18n>customerPo}" />
+						<ui:template>
+							<Text text="{TableDataModel>CustomerPo}" wrapping="false" />
+						</ui:template>
+					</ui:Column>
+                     <ui:Column
+						width="11rem"
+						filterProperty="CallByDate" id="CallByDate">
+						<Label text="{i18n>callByDate}" />
+						<ui:template>
+							<Text text="{path: 'TableDataModel>CallByDate', formatter:'.formatter.formatDate'}" wrapping="false" />
+						</ui:template>
+					</ui:Column>
+                     <ui:Column
+						width="11rem"
+						filterProperty="ExSpace" id="ExSpace">
+						<Label text="{i18n>exSpaceInd}" />
+						<ui:template>
+							<Text text="{path: 'TableDataModel>ExSpace', formatter:'.formatter.spaceIndicator'}" wrapping="false" />
+						</ui:template>
+					</ui:Column>
+                      <ui:Column
+						width="11rem"
+						filterProperty="Message" id="Message">
+						<Label text="{i18n>message}" />
+						<ui:template>
+							<Text text="{TableDataModel>Message}" wrapping="false" />
+						</ui:template>
+					</ui:Column>
+					 <ui:Column
+						width="11rem"
+						filterProperty="ConfirmedQty" id="ConfirmedQty">
+						<Label text="{i18n>configQty}" />
+						<ui:template>
+							<Text text="{TableDataModel>ConfirmedQty}" wrapping="false" />
+						</ui:template>
+					</ui:Column>
+                    <ui:Column
+						width="11rem"
+						filterProperty="CustomerPoItem" id="CustomerPoItem">
+						<Label text="{i18n>customerPoItem}" />
+						<ui:template>
+							<Text text="{TableDataModel>CustomerPoItem}" wrapping="false" />
+						</ui:template>
+					</ui:Column>
+                    
+                    <ui:Column
+						width="11rem"
+						filterProperty="SrvRendDate" id="SrvRendDate">
+						<Label text="{i18n>srvRendDate}" />
+						<ui:template>
+							<Text text="{TableDataModel>SrvRendDate}" wrapping="false" />
+						</ui:template>
+					</ui:Column>
+                    
+                     <ui:Column
+						width="15rem"
+						filterProperty="FpdStatus" id="FpdStatus">
+						<Label text="{i18n>fpdStatus}" />
+						<ui:template>
+							<Text text="{TableDataModel>FpdStatus}" wrapping="false" />
+						</ui:template>
+					</ui:Column>
+                     <ui:Column
+						width="12rem" visible="true"
+						filterProperty="FpdFinalPrice" id="FpdFinalPrice">
+						<Label text="{i18n>fpdFinalPrice}" />
+						<ui:template>
+							<Text text="{TableDataModel>FpdFinalPrice}" wrapping="false" />
+						</ui:template>
+					</ui:Column>
+                     <ui:Column
+						width="12rem" visible="true"
+						filterProperty="Finalprice_Pricefx" id="Finalprice_Pricefx">
+						<Label text="{i18n>nonNegoPrice}" />
+						<ui:template>
+							<Text text="{TableDataModel>Finalprice_Pricefx}" wrapping="false" />
+						</ui:template>
+					</ui:Column>
+                      <ui:Column
+						width="11rem"
+						filterProperty="SalesOrderStock" id="SalesOrderStock">
+						<Label text="{i18n>salesOrderStock}" />
+						<ui:template>
+							<Text text="{TableDataModel>SalesOrderStock}" wrapping="false" />
+						</ui:template>
+					</ui:Column>
+                     <ui:Column
+						width="11rem"
+						filterProperty="Sto" id="Sto">
+						<Label text="{i18n>sto}" />
+						<ui:template>
+							<Text text="{TableDataModel>Sto}" wrapping="false" />
+						</ui:template>
+					</ui:Column>
+                     <ui:Column
+						width="11rem"
+						filterProperty="StoDelvItem" id="StoItem">
+						<Label text="{i18n>stoItem}" />
+						<ui:template>
+							<Text text="{TableDataModel>StoItem}" wrapping="false" />
+						</ui:template>
+					</ui:Column>
+                     <ui:Column
+						width="11rem"
+						filterProperty="StoDelv" id="StoDelv">
+						<Label text="{i18n>stoDelv}" />
+						<ui:template>
+							<Text text="{TableDataModel>StoDelv}" wrapping="false" />
+						</ui:template>
+					</ui:Column>
+                     <ui:Column
+						width="11rem"
+						filterProperty="StoDelvItem" id="StoDelvItem">
+						<Label text="{i18n>stoDelvItem}" />
+						<ui:template>
+							<Text text="{TableDataModel>StoDelvItem}" wrapping="false" />
+						</ui:template>
+					</ui:Column>
+                      <ui:Column
+						width="11rem"
+						filterProperty="Contract" id="Contract">
+						<Label text="{i18n>contract}" />
+						<ui:template>
+							<Text text="{TableDataModel>Contract}" wrapping="false" />
+						</ui:template>
+					</ui:Column>
+                    <ui:Column
+						width="11rem"
+						filterProperty="ContractType" id="ContractType">
+						<Label text="{i18n>contractType}" />
+						<ui:template>
+							<Text text="{TableDataModel>ContractType}" wrapping="false" />
+						</ui:template>
+					</ui:Column>
+                     <ui:Column
+						width="11rem"
+						filterProperty="ContractValidFrom" id="ContractValidFrom">
+						<Label text="{i18n>contractValidFrom}" />
+						<ui:template>
+							<Text text="{TableDataModel>ContractValidFrom}" wrapping="false" />
+						</ui:template>
+					</ui:Column>
+                    <ui:Column
+						width="11rem"
+						filterProperty="ContractValidTo" id="ContractValidTo">
+						<Label text="{i18n>contractValidTo}" />
+						<ui:template>
+							<Text text="{TableDataModel>ContractValidTo}" wrapping="false" />
+						</ui:template>
+					</ui:Column>
+                    <ui:Column
+						width="11rem"
+						filterProperty="ContractItem" id="ContractItem">
+						<Label text="{i18n>contractItem}" />
+						<ui:template>
+							<Text text="{TableDataModel>ContractItem}" wrapping="false" />
+						</ui:template>
+					</ui:Column>
+                      <ui:Column
+						width="11rem"
+						filterProperty="SalesOffice" id="SalesOffice">
+						<Label text="{i18n>salesOffice}" />
+						<ui:template>
+							<Text text="{TableDataModel>SalesOffice}" wrapping="false" />
+						</ui:template>
+					</ui:Column>
+                     <ui:Column
+						width="11rem"
+						filterProperty="SalesOfficeDesc" id="SalesOfficeDesc">
+						<Label text="{i18n>salesOfficeDesc}" />
+						<ui:template>
+							<Text text="{TableDataModel>SalesOfficeDesc}" wrapping="false" />
+						</ui:template>
+					</ui:Column>
+                     <ui:Column
+						width="11rem"
+						filterProperty="SalesGroup" id="SalesGroup">
+						<Label text="{i18n>salesGroup}" />
+						<ui:template>
+							<Text text="{TableDataModel>SalesGroup}" wrapping="false" />
+						</ui:template>
+					</ui:Column>
+                  
+                      <ui:Column
+						width="11rem"
+						filterProperty="SalesGroupDesc" id="SalesGroupDesc">
+						<Label text="{i18n>salesGroupName}" />
+						<ui:template>
+							<Text text="{TableDataModel>SalesGroupDesc}" wrapping="false" />
+						</ui:template>
+					</ui:Column>
+                      <ui:Column
+						width="11rem"
+						filterProperty="SalesDistrict" id="SalesDistrict">
+						<Label text="{i18n>salesDistrict}" />
+						<ui:template>
+							<Text text="{TableDataModel>SalesDistrict}" wrapping="false" />
+						</ui:template>
+					</ui:Column>
+                     <ui:Column
+						width="11rem"
+						filterProperty="SalesDistrictDesc" id="SalesDistrictDesc">
+						<Label text="{i18n>salesDistrictDesc}" />
+						<ui:template>
+							<Text text="{TableDataModel>SalesDistrictDesc}" wrapping="false" />
+						</ui:template>
+					</ui:Column>
+                    <ui:Column
+						width="11rem"
+						filterProperty="ReqDelvDate" id="ReqDelvDate">
+						<Label text="{i18n>reqDelvDate}" />
+						<ui:template>
+							<Text text="{path: 'TableDataModel>ReqDelvDate', formatter:'.formatter.formatDate'}"  wrapping="false" />
+						</ui:template>
+					</ui:Column>
+                    <ui:Column
+						width="11rem"
+						filterProperty="PricedDate" id="PricedDate">
+						<Label text="{i18n>priceDate}" />
+						<ui:template>
+							<Text text="{path: 'TableDataModel>PricedDate', formatter:'.formatter.formatDate'}" wrapping="false" />
+						</ui:template>
+					</ui:Column>
+                    <ui:Column
+						width="11rem"
+						filterProperty="CsrNumber" id="CsrNumber">
+						<Label text="{i18n>csrNumber}" />
+						<ui:template>
+							<Text text="{TableDataModel>CsrNumber}" wrapping="false" />
+						</ui:template>
+					</ui:Column>
+                    <ui:Column
+						width="11rem"
+						filterProperty="CsrName" id="CsrName">
+						<Label text="{i18n>csrName}" />
+						<ui:template>
+							<Text text="{TableDataModel>CsrName}" wrapping="false" />
+						</ui:template>
+					</ui:Column>
+                     <ui:Column
+						width="11rem"
+						filterProperty="Inco1" id="Inco1">
+						<Label text="{i18n>inco1}" />
+						<ui:template>
+							<Text text="{TableDataModel>Inco1}" wrapping="false" />
+						</ui:template>
+					</ui:Column>
+                     <ui:Column
+						width="11rem"
+						filterProperty="Inco2" id="Inco2">
+						<Label text="{i18n>inco2}" />
+						<ui:template>
+							<Text text="{TableDataModel>Inco2}" wrapping="false" />
+						</ui:template>
+					</ui:Column>
+                    <ui:Column
+						width="11rem"
+						filterProperty="PaymentTerms" id="PaymentTerms">
+						<Label text="{i18n>paymentTerms}" />
+						<ui:template>
+							<Text text="{TableDataModel>PaymentTerms}" wrapping="false" />
+						</ui:template>
+					</ui:Column>
+                    <ui:Column
+						width="11rem"
+						filterProperty="PaymentTermsDesc" id="PaymentTermsDesc">
+						<Label text="{i18n>paymentTermsDesc}" />
+						<ui:template>
+							<Text text="{TableDataModel>PaymentTermsDesc}" wrapping="false" />
+						</ui:template>
+					</ui:Column>
+                    <ui:Column
+						width="11rem"
+						filterProperty="ShipConditions" id="ShipConditions">
+						<Label text="{i18n>shipConditions}" />
+						<ui:template>
+							<Text text="{TableDataModel>ShipConditions}" wrapping="false" />
+						</ui:template>
+					</ui:Column>
+                     <ui:Column
+						width="11rem"
+						filterProperty="ShipConditionsDesc" id="ShipConditionsDesc">
+						<Label text="{i18n>shipConditionsDesc}" />
+						<ui:template>
+							<Text text="{TableDataModel>ShipConditionsDesc}" wrapping="false" />
+						</ui:template>
+					</ui:Column>
+                    
+                   
+                     <ui:Column
+						width="15rem" visible="true"
+						filterProperty="BpAgreement" id="BpAgreement">
+						<Label text="{i18n>bpAgreement}" />
+						<ui:template>
+							<Text text="{TableDataModel>BpAgreement}" wrapping="false" />
+						</ui:template>
+					</ui:Column>
+
+                     <ui:Column
+						width="15rem" visible="true"
+						filterProperty="LastUpdatedOn" id="LastUpdatedOn">
+						<Label text="{i18n>lastUpdatedOn}" />
+						<ui:template>
+                            <Text text="{path: 'TableDataModel>LastUpdatedOn', formatter:'.formatter.formatDate'}" wrapping="false" />
+						</ui:template>
+					</ui:Column>
+
+                     <ui:Column
+						width="15rem" visible="false"
+						filterProperty="LastUpdatedTime" id="LastUpdatedTime">
+						<Label text="{i18n>lastUpdatedOnTime}" />
+						<ui:template>
+							<Text text="{path: 'TableDataModel>LastUpdatedTime', formatter:'.formatter.formatTime'}" wrapping="false" />
+						</ui:template>
+					</ui:Column>
+                    
+				</ui:columns>
+                <ui:rowActionTemplate>
+                <ui:RowAction>
+                <ui:items> 
+                <ui:RowActionItem type="Navigation" press="onDetailsPress"/>
+                </ui:items>
+                 </ui:RowAction>
+                </ui:rowActionTemplate>
+				
+			</ui:Table>
+            <!-- 
+                   
+                   
+                    
+                    <Column
+                        minScreenWidth="Tablet"
+                        demandPopin="true"
+                       visible="true"
+                        id="PricedDate"
+                    >
+                        <Text text="{i18n>priceDate}" />
+                    </Column>
+                </columns>
+
+                <items>
+                    <ColumnListItem
+                        vAlign="Middle"
+                        type="Navigation"
+                        press="onDetailsPress"
+                    >
+                        <cells>
+                            <Text text="{TableDataModel>SalesOrder}" />
+                            <Text text="{TableDataModel>SalesOrderItem}" />
+                            <Text text="{TableDataModel>SalesOrg}" />
+                            <Text text="{TableDataModel>Division}" />
+                            <Text text="{TableDataModel>OrderType}" />
+                            <Text
+                                text="{path: 'TableDataModel>OrderCreateDate', formatter:'.formatter.formatDate'}"
+                            />
+                            <Text text="{TableDataModel>SoldTo}" />
+                            <Text text="{TableDataModel>ShipTo}" />
+                            <Text text="{TableDataModel>SalesOrderQty}" />
+                            <Text text="{TableDataModel>Material}" />
+                            <Text text="{TableDataModel>DelvPlant}" />
+                            <Text text="{TableDataModel>CsrNumber}" />
+                            <Text
+                                text="{path: 'TableDataModel>CallByDate', formatter:'.formatter.formatDate'}"
+                            />
+                            <Text
+                                text="{path: 'TableDataModel>ExSpace', formatter:'.formatter.spaceIndicator'}"
+                            />
+                            <Text text="{TableDataModel>Message}" />
+                            <Text text="{TableDataModel>ConfirmedQty}" />
+                            <Text text="{TableDataModel>FpdStatus}" />
+                            <Text text="{TableDataModel>SalesOrderStock}" />
+                            <Text text="{TableDataModel>Sto}" />
+                            <Text text="{TableDataModel>StoItem}" />
+                            <Text text="{TableDataModel>StoDelv}" />
+                            <Text text="{TableDataModel>StoDelvItem}" />
+                            <Text
+                                text="{path: 'TableDataModel>PricedDate', formatter:'.formatter.formatDate'}"
+                            />
+                        </cells>
+                    </ColumnListItem>
+                </items>
+            </Table> -->
+        </f:content>
+    </f:DynamicPage>
+</mvc:View>

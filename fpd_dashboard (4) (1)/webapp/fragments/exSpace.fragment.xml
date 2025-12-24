@@ -1,0 +1,73 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:mvc="sap.ui.core.mvc" xmlns:sap.ui.fl="sap.ui.fl"
+	xmlns:core="sap.ui.core">
+	<Dialog
+		id="exSpaceDialog"
+		title="{i18n>updateExSpacIndic}" contentWidth="750px" contentHeight="420px">
+		<content>
+		<Table
+					 sap.ui.fl:flexibility="sap/m/flexibility/EngineFlex"
+					inset="false" autoPopinMode="true" growing="true" growingThreshold="15" fixedLayout="false"
+					items="{
+						path: 'exSpaceDialogModel>/'
+					}" 
+				>
+				<columns>
+						<Column minScreenWidth="Tablet" demandPopin="true">
+							<Text text="{i18n>salesOrder}"/>
+						</Column>
+						<Column minScreenWidth="Tablet" demandPopin="true" >
+							<Text text="{i18n>salesOrderItem}"/>
+						</Column>
+						<Column minScreenWidth="Tablet" demandPopin="true" >
+							<Text text="{i18n>exSpaceIndicator}"/>
+						</Column>
+						
+						
+						</columns>
+						<items>
+						<ColumnListItem vAlign="Middle">
+							<cells>
+							
+								<Text text="{exSpaceDialogModel>order}" />
+								<Text text="{exSpaceDialogModel>item}" />
+								<ComboBox selectedKey="{exSpaceDialogModel>exSpace}" items="{LocalDataModel>/exSpace}">
+												<core:Item key="{LocalDataModel>text}"  text="{LocalDataModel>text}" />
+												<!-- <core:Item key="No" text="No" /> -->
+											</ComboBox>
+									
+									</cells>
+									</ColumnListItem>
+									</items>
+				</Table>
+			
+			
+			
+		</content>
+		  <beginButton>
+   <Button text="Save" press="UpdateExSpaceIndictr" />
+  </beginButton>
+  <endButton>
+   <Button text="Cancel" press="closeUpdateCallByDate" />
+  </endButton>
+		<!-- <footer>
+			<Toolbar>
+				<content>
+					
+					<ToolbarSpacer />
+					<Button type="Accept"
+							text="UpdateCallByDate"
+							press="UpdateCallByDat1e" />
+					<Button id="Reject"
+						text="Cancel"
+						press="._closeDialog"
+						ariaHasPopup="Dialog" />
+				</content>
+			</Toolbar>
+		</footer> -->
+	</Dialog>
+</core:FragmentDefinition>
+
+

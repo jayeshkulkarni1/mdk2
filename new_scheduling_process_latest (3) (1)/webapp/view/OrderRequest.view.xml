@@ -1,0 +1,425 @@
+<mvc:View height="100%" xmlns:mvc="sap.ui.core.mvc" controllerName="schedulingprocess.schedulingprocess.controller.OrderRequest" xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:f="sap.f" xmlns:fb="sap.ui.comp.filterbar" xmlns:sap.ui.fl="sap.ui.fl" xmlns:table="sap.ui.table" xmlns:svm="sap.ui.comp.smartvariants">
+    <f:DynamicPage headerExpanded="{/headerExpanded}" showFooter="true">
+        <f:title>
+            <f:DynamicPageTitle>
+                <f:heading>
+                    <Title text="{i18n>reqForDelive}"/>
+                </f:heading>
+                <!-- <f:expandedContent>
+                    <svm:SmartVariantManagement id="svm" class="sapUiSmallMarginBegin" showExecuteOnSelection="true"/>
+                </f:expandedContent> -->
+            </f:DynamicPageTitle>
+        </f:title>
+        <f:header>
+            <f:DynamicPageHeader>
+                <f:content/>
+            </f:DynamicPageHeader>
+        </f:header>
+        <f:content>
+            <table:Table id="table" rows="{TableDHModel>/DHTable}" filter="onFilterScheduleTable" showColumnVisibilityMenu="true">
+                <table:extension>
+                    <OverflowToolbar>
+                        <Title text="Items({= ${TableDHModel>/DHTable}.length})" level="H2"/>
+                        <ToolbarSpacer/>
+                        <Button text="{i18n>addNewRow}" press="onAddNewRow"/>
+                        <Button text="{i18n>delete}" press="onDeleteRow"/>
+
+                        <Input width="12rem" placeholder="{i18n>fixedcolumncount}" tooltip="{i18n>fixedcolumncount}" liveChange="onColumnFreeze"/>
+
+                        <Button icon="sap-icon://excel-attachment" press="onExport"/>
+                    </OverflowToolbar>
+                </table:extension>
+                <table:columns>
+                    <table:Column width="11rem" id="ReqId" visible="{DisplayModel>/ReqIdVisible}" filterProperty="ReqId">
+                        <Label text="{i18n>dhReqId}"/>
+
+                        <table:template>
+                            <Text text="{TableDHModel>ReqId}"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="11rem" id="test" visible="{DisplayModel>/createdVisible}" filterProperty="test">
+                        <Label text="{i18n>created}"/>
+                        <table:template>
+                            <Text text="{TableDHModel>test}"/>
+                        </table:template>
+                    </table:Column>
+
+                    <table:Column width="11rem" id="Week" visible="{DisplayModel>/WeekVisible}" filterProperty="Week">
+                        <Label text="{i18n>scheduleWeek}"/>
+
+                        <table:template>
+                            <Text text="{TableDHModel>Week}"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="11rem" id="ManagerId" visible="{DisplayModel>/ManagerIdVisible}" filterProperty="ManagerId">
+                        <Label text="{i18n>accmgr}"/>
+
+                        <table:template>
+                            <Text text="{TableDHModel>ManagerId}"/>
+                        </table:template>
+                    </table:Column>
+
+                    <table:Column width="11rem" id="AccMngName" visible="{DisplayModel>/AccountMngVisible}" filterProperty="AccMngName">
+                        <Label text="{i18n>accountMngName}"/>
+
+                        <table:template>
+                            <Text text="{TableDHModel>AccMngName}"/>
+                        </table:template>
+                    </table:Column>
+
+                    <table:Column width="11rem" id="NetworkPlant" visible="{DisplayModel>/PlantGrpVisible}" filterProperty="NetworkPlant">
+
+                        <Label text="{i18n>plantgrp}"/>
+
+                        <table:template>
+                            <Text text="{TableDHModel>NetworkPlant}"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="11rem" id="Plant" visible="{DisplayModel>/PlantVisible}" filterProperty="Plant">
+                        <Label text="{i18n>plant}"/>
+
+                        <table:template>
+                            <Text text="{TableDHModel>Plant}"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="11rem" id="CustomerId" visible="{DisplayModel>/CustomerIdVisible}" filterProperty="CustomerId">
+                        <Label text="{i18n>soldToID}"/>
+
+                        <table:template>
+                            <Text text="{TableDHModel>CustomerId}"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="11rem" id="SoldToName" visible="{DisplayModel>/SoldToNameVisible}" filterProperty="SoldToName">
+                        <Label text="{i18n>soldToName}"/>
+
+                        <table:template>
+                            <Text text="{TableDHModel>SoldToName}"/>
+                        </table:template>
+                    </table:Column>
+
+                    <table:Column width="11rem" id="Material" visible="{DisplayModel>/MaterialVisible}" filterProperty="Material">
+                        <Label text="{i18n>matnr}"/>
+
+                        <table:template>
+                            <Text text="{TableDHModel>Material}"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="11rem" id="MaterialDesc" visible="{DisplayModel>/MaterialDescVisible}" filterProperty="MaterialDesc">
+                        <Label text="{i18n>matnrDesc}"/>
+
+                        <table:template>
+                            <Text text="{TableDHModel>MaterialDesc}"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="11rem" id="FormulaKey" visible="{DisplayModel>/FormulaKeyVisible}" filterProperty="FormulaKey">
+                        <Label text="{i18n>formulaKey}"/>
+
+                        <table:template>
+                            <Text text="{TableDHModel>FormulaKey}"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="11rem" id="FormulaKeyDesc" visible="{DisplayModel>/FormulaKeyDescVisible}" filterProperty="FormulaKeyDesc">
+                        <Label text="{i18n>formulaDesc}"/>
+
+                        <table:template>
+                            <Text text="{TableDHModel>FormulaKeyDesc}"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="11rem" id="Incoterms" visible="{DisplayModel>/IncotermsVisible}" filterProperty="Incoterms">
+                        <Label text="{i18n>inco}"/>
+
+                        <table:template>
+                            <Text text="{TableDHModel>Incoterms}"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="11rem" id="BusinessScenario" visible="{DisplayModel>/BusinessScenarioVisible}" filterProperty="BusinessScenario">
+                        <Label text="{i18n>businScen}"/>
+
+                        <table:template>
+                            <Text text="{TableDHModel>BusinessScenario}"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="11rem" id="CustomerReqQty" visible="{DisplayModel>/CustomerReqQtyVisible}" filterProperty="CustomerReqQty">
+                        <Label text="{i18n>custReqQty}"/>
+
+                        <table:template>
+                             <Text text="{path: 'TableDHModel>CustomerReqQty', formatter: '.formatter.QtyFormatting'}" />
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="11rem" id="PrevDueQty" visible="{DisplayModel>/PrevDueQtyVisible}" filterProperty="PrevDueQty">
+                        <Label text="{i18n>prevDue}"/>
+
+                        <table:template>
+                        <Text text="{path: 'TableDHModel>PrevDueQty', formatter: '.formatter.QtyFormatting'}" />
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="11rem" id="AmConfQty" visible="{DisplayModel>/AmConfQtyVisible}" filterProperty="AmConfQty">
+                        <Label text="{i18n>amConQty}"/>
+
+                        <table:template>
+                            <Input value="{TableDHModel>AmConfQty}"  change="onQuantiyChange" editable="{DisplayModel>/AmConfQty}"  textFormatter=".formatter.QtyFormatting" id="amconf"/>
+                        </table:template>
+                    </table:Column>
+
+                    <table:Column width="11rem" id="CurrentDueQty" visible="{DisplayModel>/CurrentDueQtyVisible}" filterProperty="CurrentDueQty">
+                        <Label text="{i18n>currDue}"/>
+
+                        <table:template>
+                            
+                             <Text text="{path: 'TableDHModel>CurrentDueQty', formatter: '.formatter.QtyFormatting'}" />
+                            
+                        </table:template>
+                    </table:Column>
+                 
+                    <table:Column width="11rem" id="ReqDelDat" visible="{DisplayModel>/ReqDelDatVisible}" filterProperty="ReqDelDat">
+                        <Label text="{i18n>delDate}"/>
+
+                        <table:template>
+                            <DatePicker value="{TableDHModel>ReqDelDat}" valueFormat="ddMMyyyy" editable="{DisplayModel>/ReqDelDat}"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="11rem" id="ReqDelDay" visible="{DisplayModel>/ReqDelDayVisible}" filterProperty="ReqDelDay">
+                        <Label text="{i18n>day}"/>
+
+                        <table:template>
+                            <Text text="{TableDHModel>ReqDelDay}"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="11rem" id="PackRequested" visible="{DisplayModel>/PackRequestedVisible}" filterProperty="PackRequested">
+                        <Label text="{i18n>packing}"/>
+
+                        <table:template>
+                            <ComboBox value="{TableDHModel>PackRequested}" editable="{DisplayModel>/PackRequested}">
+                                <core:Item key="SMALL BAGS" text="SMALL BAGS"/>
+                                <core:Item key="BIG BAGS" text="BIG BAGS"/>
+                                <core:Item key="BULK" text="BULK"/>
+                            </ComboBox>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="11rem" id="CuttingQty" visible="{DisplayModel>/CuttingQtyVisible}" filterProperty="CuttingQty">
+                        <Label text="{i18n>cuttingQty}"/>
+                        <table:template>
+                              <Input value="{TableDHModel>CuttingQty}" editable="{DisplayModel>/cuttingQty}" textFormatter=".formatter.QtyFormatting"/> 
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="11rem" id="CuttingQtyMon" visible="{DisplayModel>/CuttingQtyMonVisible}" filterProperty="CuttingQtyMon">
+                        <Label text="{i18n>mon}"/>
+
+                        <table:template>
+                                <Input value="{TableDHModel>CuttingQtyMon}" editable="{DisplayModel>/mon}" textFormatter=".formatter.QtyFormatting"/> 
+                        </table:template>
+                    </table:Column>
+
+                    <table:Column width="11rem" id="CuttingQtyTue" visible="{DisplayModel>/CuttingQtyMonVisible}" filterProperty="CuttingQtyTue">
+                        <Label text="{i18n>tue}"/>
+
+                        <table:template>
+                            <Input value="{TableDHModel>CuttingQtyTue}" editable="{DisplayModel>/mon}" textFormatter=".formatter.QtyFormatting"/>
+                            
+
+                        </table:template>
+                    </table:Column>
+
+                    <table:Column width="11rem" id="CuttingQtyWed" visible="{DisplayModel>/CuttingQtyMonVisible}" filterProperty="CuttingQtyWed">
+                        <Label text="{i18n>wed}"/>
+                        <table:template>
+                            <Input value="{TableDHModel>CuttingQtyWed}" editable="{DisplayModel>/mon}" textFormatter=".formatter.QtyFormatting"/>
+                        </table:template>
+                    </table:Column>
+
+                    <table:Column width="11rem" id="CuttingQtyThur" visible="{DisplayModel>/CuttingQtyMonVisible}" filterProperty="CuttingQtyThur">
+                        <Label text="{i18n>thu}"/>
+
+                        <table:template>
+                            <Input value="{TableDHModel>CuttingQtyThur}" editable="{DisplayModel>/mon}" textFormatter=".formatter.QtyFormatting"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="11rem" id="CuttingQtyFri" visible="{DisplayModel>/CuttingQtyMonVisible}" filterProperty="CuttingQtyFri">
+                        <Label text="{i18n>fri}"/>
+                        <table:template>
+                            <Input value="{TableDHModel>CuttingQtyFri}" editable="{DisplayModel>/mon}" textFormatter=".formatter.QtyFormatting"/>
+                        </table:template>
+                    </table:Column>
+
+                    <table:Column width="11rem" id="CuttingQtySat" visible="{DisplayModel>/CuttingQtyMonVisible}" filterProperty="CuttingQtySat">
+                        <Label text="{i18n>sat}"/>
+                        <table:template>
+                            <Input value="{TableDHModel>CuttingQtySat}" editable="{DisplayModel>/mon}" textFormatter=".formatter.QtyFormatting"/>  
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="11rem" id="CuttingQtySun" visible="{DisplayModel>/CuttingQtyMonVisible}" filterProperty="CuttingQtySun">
+                        <Label text="{i18n>sun}"/>
+                        <table:template>
+                            <Input value="{TableDHModel>CuttingQtySun}" editable="{DisplayModel>/mon}" textFormatter=".formatter.QtyFormatting"/>
+                        </table:template>
+                    </table:Column>
+
+                    <table:Column width="11rem" id="PackingSel" visible="{DisplayModel>/CuttingQtyMonVisible}" filterProperty="PackingSel">
+                        <Label text="{i18n>bagSelect}"/>
+                        <table:template>
+                            <Input value="{TableDHModel>PackingSel}" editable="{DisplayModel>/mon}"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="11rem" id="PoNo" visible="{DisplayModel>/PoNoVisible}" filterProperty="PoNo">
+                        <Label text="{i18n>poNo}"/>
+                        <table:template>
+                            <Input value="{TableDHModel>PoNo}" editable="{DisplayModel>/PoNo}"/>
+                        </table:template>
+                    </table:Column>
+
+                    <table:Column width="11rem" id="NfeCoopCustomer" visible="{DisplayModel>/NfeCustomerVisible}" filterProperty="NfeCoopCustomer">
+                        <Label text="{i18n>nfeCustomer}"/>
+                        <table:template>
+                            <Input value="{TableDHModel>NfeCoopCustomer}" editable="{DisplayModel>/NfeCustomer}"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="11rem" id="Nfebilling" visible="{DisplayModel>/NfeBillingVisible}" filterProperty="Nfebilling">
+                        <Label text="{i18n>nfeBilling}"/>
+
+                        <table:template>
+                            <Input value="{TableDHModel>Nfebilling}" editable="{DisplayModel>/NfeCustomer}"/>
+                        </table:template>
+                    </table:Column>
+
+                    <!-- Workbench TR : DA1K909941
+                                    OTC_I658 New Column added as part of new changes  -->
+                    <table:Column width="11rem" id="ProtocolId" visible="{DisplayModel>/ProtocolIDVisible}">
+                        <Label text="{i18n>protocolNo}"/>
+                        <table:template>
+                            <Input value="{TableDHModel>ProtocolId}"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="11rem" id="ShiptoId" filterProperty="ShiptoId">
+                        <Label text="{i18n>shipTo}"/>
+                        <table:template>
+                            <Text text="{TableDHModel>ShiptoId}"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="11rem" id="ShipToName" filterProperty="ShipToName">
+                        <Label text="{i18n>shipToName}"/>
+                        <table:template>
+                            <Text text="{TableDHModel>ShipToName}"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="11rem" id="PaymentTermsn" visible="{DisplayModel>/PaymentTermsnVisible}" filterProperty="PaymentTermsn">
+                        <Label text="{i18n>paymentTermsn}"/>
+                        <table:template>
+                            <Input value="{TableDHModel>PaymentTermsn}" editable="{DisplayModel>/PaymentTermsn}"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="14rem" id="SelfConsInd" visible="{DisplayModel>/SelfConsIndVisible}" filterProperty="SelfConsInd">
+                        <Label text="{i18n>selfConsInd}"/>
+                        <table:template>
+                            <CheckBox selected="{path: 'TableDHModel>SelfConsInd', formatter:'.formatter.selfConsumpIndic'}" select="onSelfConsumptCheckbox" editable="{DisplayModel>/SelfConsInd}"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="11rem" id="DelInstr" visible="{DisplayModel>/DelInstrVisible}" filterProperty="DelInstr">
+                        <Label text="{i18n>delInd}"/>
+                        <table:template>
+                            <Input value="{TableDHModel>DelInstr}" editable="{DisplayModel>/DelInstr}"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="11rem" id="ContractReq" visible="{DisplayModel>/ContractReqVisible}" filterProperty="ContractReq">
+                        <Label text="{i18n>reqContract}"/>
+
+                        <table:template>
+                            <Input id="contractInput" value="{TableDHModel>ContractReq}" editable="{DisplayModel>/contractReq}" valueHelpOnly="true" showValueHelp="true" valueHelpRequest="onContractChange"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="11rem" id="ContractItemNo" visible="{DisplayModel>/ContractItemNoVisible}" filterProperty="ContractItemNo">
+                        <Label text="{i18n>conItem}"/>
+                        <table:template>
+                            <Input value="{TableDHModel>ContractItemNo}" editable="false"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="11rem" id="ShipTo" visible="{DisplayModel>/ShipToVisible}" filterProperty="ShipTo">
+                        <Label text="{i18n>shipToProtocol}"/>
+                        <table:template>
+                            <Input id="shipToInput" value="{TableDHModel>ShipTo}" editable="{DisplayModel>/shipTo}" valueHelpOnly="true" showValueHelp="true" valueHelpRequest="onShipToChange"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="11rem" id="ProtocolPrice" visible="{DisplayModel>/ProtocolPriceVisible}" filterProperty="ProtocolPrice">
+                        <Label text="{i18n>priceToCust}"/>
+                        <table:template>
+                            <Input value="{TableDHModel>ProtocolPrice}" editable="{DisplayModel>/priceToCustomer}"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="11rem" id="ContractFinalized" visible="{DisplayModel>/ContractFinalizedVisible}" filterProperty="ContractFinalized">
+                        <Label text="{i18n>finContract}"/>
+                        <table:template>
+                            <Text text="{TableDHModel>ContractFinalized}"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="11rem" id="SoCreated" visible="{DisplayModel>/SoCreatedVisible}" filterProperty="SoCreated">
+                        <Label text="{i18n>soCreated}"/>
+                        <table:template>
+                            <Text text="{TableDHModel>SoCreated}"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="11rem" id="SoItem" visible="{DisplayModel>/SoItemVisible}" filterProperty="SoItem">
+                        <Label text="{i18n>soItem}"/>
+                        <table:template>
+                            <Text text="{TableDHModel>SoItem}"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="11rem" id="ContractSelError" visible="{DisplayModel>/ContractSelErrorVisible}" filterProperty="ContractSelError">
+                        <Label text="{i18n>conSelectionError}"/>
+                        <table:template>
+                            <Text text="{TableDHModel>ContractSelError}"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="11rem" id="SoCreError" visible="{DisplayModel>/SoCreErrorVisible}" filterProperty="SoCreError">
+                        <Label text="{i18n>soCreationLog}"/>
+                        <table:template>
+                            <Text text="{TableDHModel>SoCreError}"/>
+                        </table:template>
+                    </table:Column> 
+
+                    
+                    <table:Column width="11rem" id="NFE_BILLING_DATE" visible="{DisplayModel>/NfeCustomerVisible}" filterProperty="NFE_BILLING_DATE">
+                        <Label text="{i18n>nfebillingdate}"/>
+                        <table:template>
+                            <Input value="{TableDHModel>NFE_BILLING_DATE}" editable="true"/>
+                        </table:template>
+                    </table:Column>
+                  
+                  <!-- Begin the code -->
+                  <!-- Workbench TR : DA1K919630 
+                                    OTC_E491 - GPT:GPT-31745- New Column added as part of new changes  -->
+                     <table:Column width="11rem" id="BackLogQty" visible="{DisplayModel>/BackLogQtyVisible}">
+                                                <Label text="{i18n>BacklogQty}" />
+                                                <table:template>
+                                                   
+                                                     <Text text="{path: 'TableDHModel>BackLogQty', formatter: '.formatter.QtyFormatting'}" />
+                                                </table:template>
+                                            </table:Column>
+                 <!-- End the code -->
+                  <!-- Workbench TR : DA1K919630
+                                    OTC_E491 - GPT:GPT-31745- New Column added as part of new changes  -->
+                <!-- Begin the code -->
+                  <!-- Workbench TR : DA1K919630 
+                                    OTC_E491 - GPT -32422 - New Column added as part of new changes  -->
+                     <table:Column width="11rem" id="CNPJ_NO" visible="{DisplayModel>/CNPJVisible}">
+                                                <Label text="{i18n>cnpjNumber}" />
+                                                <table:template>
+                                                    <Input value="{TableDHModel>CNPJ_NO}" editable="true" />
+                                                </table:template>
+                                            </table:Column>
+                 <!-- End the code -->
+                  <!-- Workbench TR : DA1K919630
+                                    OTC_E491 - GPT -32422 - New Column added as part of new changes  -->
+                </table:columns>
+            </table:Table>   
+        </f:content>
+        <f:footer>
+            <OverflowToolbar>
+                <Button icon="sap-icon://alert" text="{= ${message>/}.length}" visible="{= ${message>/}.length > 0}" type="Emphasized" press="onMessagePopOver"/>
+
+                <ToolbarSpacer/>
+                <Button type="Accept" text="{i18n>save}" press="onSaveDH"/>
+                <Button type="Reject" text="{i18n>reject}" press="onCancelDH"/>
+            </OverflowToolbar>
+        </f:footer>
+    </f:DynamicPage>
+</mvc:View>
+

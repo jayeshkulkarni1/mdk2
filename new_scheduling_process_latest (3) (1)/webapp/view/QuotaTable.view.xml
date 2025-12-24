@@ -1,0 +1,172 @@
+<mvc:View height="100%" xmlns:mvc="sap.ui.core.mvc" controllerName="schedulingprocess.schedulingprocess.controller.QuotaTable" xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:f="sap.f" xmlns:fb="sap.ui.comp.filterbar" xmlns:sap.ui.fl="sap.ui.fl" xmlns:table="sap.ui.table" xmlns:svm="sap.ui.comp.smartvariants">
+    <f:DynamicPage headerExpanded="{/headerExpanded}" showFooter="true">
+        <f:title>
+            <f:DynamicPageTitle>
+                <f:heading>
+                    <Title text="{i18n>quotaTable}"/>
+                </f:heading>
+            </f:DynamicPageTitle>
+        </f:title>
+        <f:header>
+            <f:DynamicPageHeader>
+                <f:content>
+                    <fb:FilterBar id="mainPagefilterbar" persistencyKey="myPersKey" useToolbar="false" search=".onSearch" filterChange=".onFilterChange" afterVariantLoad=".onAfterVariantLoad">
+                        <fb:filterGroupItems>
+                            <fb:FilterGroupItem name="Week" label="{i18n>week}" groupName="Group1" visibleInFilterBar="true">
+                                <fb:control>
+                                    <MultiInput id="weekInput" showSuggestion="false" width="100%" showValueHelp="true" valueHelpOnly="false" required="true" valueHelpRequest="handleWeekF4"/>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+                            <fb:FilterGroupItem name="Account Manager" label="{i18n>accMgr}" groupName="Group1" visibleInFilterBar="true">
+                                <fb:control>
+                                    <MultiInput id="accMngInput" required="true" value="{FiltersModel>/AccountManager}" valueHelpRequest=".handleAccManagerF4" valueHelpOnly="true">
+                                        <core:Item key="{key}" text="{name}"/>
+                                    </MultiInput>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+                            <fb:FilterGroupItem name="Plant" label="{i18n>plant}" groupName="Group1" visibleInFilterBar="true">
+                                <fb:control>
+                                    <MultiInput id="plantInput" value="{FiltersModel>/Plant}" name="Plant" valueHelpRequest=".handlePlantF4" valueHelpOnly="true">
+                                        <core:Item key="{key}" text="{name}"/>
+                                    </MultiInput>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+                            <fb:FilterGroupItem name="Plant Group" label="{i18n>plantgrp}" groupName="Group1" visibleInFilterBar="true">
+                                <fb:control>
+                                    <MultiInput id="plantGroupInput" value="{FiltersModel>/PlantGroup}" name="{i18n>plantgrp}" change="onSelectionChange" valueHelpRequest=".handlePlantGroupF4" valueHelpOnly="true">
+                                        <core:Item key="{key}" text="{name}"/>
+                                    </MultiInput>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+                            <fb:FilterGroupItem name="Formula" label="{i18n>formulaKey}" groupName="Group1" visibleInFilterBar="true">
+                                <fb:control>
+                                    <MultiInput id="formulaKeyInput" value="{FiltersModel>/FormulaKey}" name="{i18n>formulaKey}" change="onSelectionChange" valueHelpRequest=".handleFormulaKeyF4" valueHelpOnly="true">
+                                        <core:Item key="{key}" text="{name}"/>
+                                    </MultiInput>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+                            <fb:FilterGroupItem name="Customer" label="{i18n>customer}" groupName="Group1" visibleInFilterBar="true">
+                                <fb:control>
+                                    <MultiInput id="customerInput" value="{FiltersModel>/Customer}" name="{i18n>customer}" change="onSelectionChange" valueHelpRequest=".handleCustomerF4" valueHelpOnly="true">
+                                        <core:Item key="{key}" text="{name}"/>
+                                    </MultiInput>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+                            <fb:FilterGroupItem name="Material" label="{i18n>matnr}" groupName="Group1" visibleInFilterBar="true">
+                                <fb:control>
+                                    <MultiInput id="materialInput" value="{FiltersModel>/Material}" name="{i18n>matnr}" change="onSelectionChange" valueHelpRequest=".handleMaterialF4" valueHelpOnly="true">
+                                        <core:Item key="{key}" text="{name}"/>
+                                    </MultiInput>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+                        </fb:filterGroupItems>
+                    </fb:FilterBar>
+                </f:content>
+            </f:DynamicPageHeader>
+        </f:header>
+        <f:content>
+            <table:Table id="table" rows="{QuotaTableModel>/results}" filter="onFilterScheduleTable" visible="false">
+                <table:extension>
+                    <OverflowToolbar>
+                        <Title text="Items({= ${QuotaTableModel>/results}.length})" level="H2"/>
+                        <ToolbarSpacer/>
+                        <Input width="12rem" placeholder="{i18n>fixedcolumncount}" tooltip="{i18n>fixedcolumncount}" liveChange="onColumnFreeze"/>
+
+                        <Button icon="sap-icon://excel-attachment" press="onExport"/>
+                    </OverflowToolbar>
+                </table:extension>
+                <table:columns>
+                    <table:Column width="11rem" id="Week" filterProperty="Week">
+                        <Label text="{i18n>week}"/>
+                        <table:template>
+                            <Text text="{QuotaTableModel>Week}"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="11rem" id="ManagerId" filterProperty="ManagerId">
+                        <Label text="{i18n>accountMngID}"/>
+                        <table:template>
+                            <Text text="{QuotaTableModel>ManagerId}"/>
+                        </table:template>
+                    </table:Column>
+
+                    <table:Column width="11rem" id="AccMngName" filterProperty="AccMngName">
+                        <Label text="{i18n>accountMngName}"/>
+
+                        <table:template>
+                            <Text text="{QuotaTableModel>AccMngName}"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="11rem" id="Plant" filterProperty="Plant">
+                        <Label text="{i18n>plant}"/>
+                        <table:template>
+                            <Text text="{QuotaTableModel>Plant}"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="11rem" id="PlantDesc" filterProperty="PlantDesc">
+                        <Label text="{i18n>plantDesc}"/>
+
+                        <table:template>
+                            <Text text="{QuotaTableModel>PlantDesc}"/>
+                        </table:template>
+                    </table:Column>
+
+                    <table:Column width="11rem" id="Material" filterProperty="Material">
+                        <Label text="{i18n>matnr}"/>
+                        <table:template>
+                            <Text text="{QuotaTableModel>Material}"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="11rem" id="MaterialDesc" filterProperty="MaterialDesc">
+                        <Label text="{i18n>matnrDesc}"/>
+                        <table:template>
+                            <Text text="{QuotaTableModel>MaterialDesc}"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="11rem" id="FormulaKey" filterProperty="FormulaKey">
+                        <Label text="{i18n>formulaKey}"/>
+                        <table:template>
+                            <Text text="{QuotaTableModel>FormulaKey}"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="11rem" id="FormulaDesc" filterProperty="FormulaDesc">
+                        <Label text="{i18n>formulaDesc}"/>
+                        <table:template>
+                            <Text text="{QuotaTableModel>FormulaDesc}"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="11rem" id="CustomerID" filterProperty="CustomerName">
+                        <Label text="{i18n>soldToPartyID}"/>
+                        <table:template>
+                            <Text text="{QuotaTableModel>CustomerID}"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="11rem" id="CustomerName" filterProperty="CustomerName">
+                        <Label text="{i18n>soldToPrtyName}"/>
+                        <table:template>
+                            <Text text="{QuotaTableModel>CustomerName}"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="11rem" id="Quota" filterProperty="Quota">
+                        <Label text="{i18n>quota}"/>
+                        <table:template>
+                            <Text text="{QuotaTableModel>Quota}"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="11rem" id="Uom" filterProperty="Uom">
+                        <Label text="{i18n>uom}"/>
+                        <table:template>
+                            <Text text="{path: 'TableScheduleModel>Uom', formatter: '.formatter.QtyFormatting'}" />
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="11rem" id="CreatedOn" filterProperty="CreatedOn">
+                        <Label text="{i18n>creationDate}"/>
+                        <table:template>
+                            <Text text="{QuotaTableModel>CreatedOn}"/>
+                        </table:template>
+                    </table:Column>
+                </table:columns>
+            </table:Table>
+        </f:content>
+    </f:DynamicPage>
+</mvc:View>
+
