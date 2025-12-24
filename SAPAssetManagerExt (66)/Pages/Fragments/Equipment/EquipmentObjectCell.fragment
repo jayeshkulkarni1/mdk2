@@ -1,0 +1,10 @@
+{
+    "_Type": "Control.Type.ObjectCell",        
+    "AccessoryType": "DisclosureIndicator",
+    "Title": "#Property:EquipDesc",
+    "Description":"/SAPAssetManagerExt/Rules/FunctionalLocation/FormatSortField.js",
+    "OnPress": "/SAPAssetManager/Rules/Equipment/EquipmentDetailsNav.js",
+    "PreserveIconStackSpacing": false,
+    "Subhead": "#Property:EquipId",
+    "StatusText": "#Property:ObjectStatus_Nav/#Property:SystemStatus_Nav/#Property:StatusText"
+}

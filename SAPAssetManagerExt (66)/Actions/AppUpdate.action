@@ -1,0 +1,8 @@
+{
+    "_Type": "Action.Type.ApplicationUpdate",
+    "ActionResult": {
+        "_Name": "AppUpdate"
+    },
+    "OnFailure": "/SAPAssetManagerExt/Rules/AppUpdateFailure.js",
+    "OnSuccess": "/SAPAssetManagerExt/Rules/AppUpdateSuccess.js"
+}
